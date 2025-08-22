@@ -42,3 +42,16 @@ Important note:
 Make sure to fetch and merge before you work on any file.
 Push everytime you finish a file
 </pre>
+
+### Installation guide:
+
+1. Download the zip file to your desired path.
+2. Unzip the zip file.
+3. Copy the folder path.
+4. Open Edit the system environment variable.
+5. Click Environment Variables.
+6. Click the path on the upper side, and click edit.
+7. Click new and paste the file path that you have copied.
+8. Click Ok and do the same on the path on the bottom side.
+9. Click Ok until all apps is closed.
+10. Open your CMD and type update. A guide should output when you type it.
