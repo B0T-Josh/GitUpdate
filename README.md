@@ -17,15 +17,15 @@
 * git push origin main //this uploads your changes to the online remote repository
 
 ### Update usage:
-
+<pre>
 update <command> <option> <br>
 command - ['-a', '-c', '-p', '-f', '-m', '-A']<br>
-option - if -a is chosen, type the name of the file that you wanted to add changes into.<br>
-- if -c is chosen, type the message for the commit.<br>
-- if -p is chosen, you don't need to type anything after it. This pushes your updates to the remote branch<br>
-- if -f is chosen, you don't need to type anything after it. This fetches updates from the remote branch<br>
-- if -m is chosen, you don't need to type anything after it. This merges your local repository with the updates from the remote branch<br>
-- if -A is chosen, you don't need to type anything after it. This will fetch, merge, add changes, commit and push with one command<br>
+option  - if -a is chosen, type the name of the file that you wanted to add changes into.<br>
+        - if -c is chosen, type the message for the commit.<br>
+        - if -p is chosen, you don't need to type anything after it. This pushes your updates to the remote branch<br>
+        - if -f is chosen, you don't need to type anything after it. This fetches updates from the remote branch<br>
+        - if -m is chosen, you don't need to type anything after it. This merges your local repository with the updates from the remote branch<br>
+        - if -A is chosen, you don't need to type anything after it. This will fetch, merge, add changes, commit and push with one command<br>
 usage:
 * update -a <filename> / . (to add all changes)
 * update -a <filename> / . (to add all changes)
@@ -37,6 +37,7 @@ proper usage:
 * update -f -m
 * update -a <filename/.> -c <comment/message> -p
 * update -A
+</pre>
 
 Important note:<br>
 Make sure to fetch and merge before you work on any file.<br>
