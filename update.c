@@ -133,13 +133,13 @@ bool updateAll() {
 
 void printError() {
     printf("Syntax error.\nupdate <command> <option>\n"); 
-    printf("command - ['-a', '-c', '-p']\n");
+    printf("command - ['-a', '-c', '-p', '-f', '-m', '-A']\n");
     printf("option - if -a is chosen, type the name of the file that you wanted to add changes into.\n");
     printf("       - if -c is chosen, type the message for the commit.\n");
-    printf("       - if -p is chosen, you don't need to type anything after it. this pushes your updates to the remote branch\n");
-    printf("       - if -f is chosen, you don't need to type anything after it. this fetches updates from the remote branch\n");
-    printf("       - if -m is chosen, you don't need to type anything after it. this merges your local repository with the updates from the remote branch\n");
-    printf("       - if -A is chosen, you will fetch, merge, add changes, commit and push with one command\n");
+    printf("       - if -p is chosen, you don't need to type anything after it. This pushes your updates to the remote branch\n");
+    printf("       - if -f is chosen, you don't need to type anything after it. This fetches updates from the remote branch\n");
+    printf("       - if -m is chosen, you don't need to type anything after it. This merges your local repository with the updates from the remote branch\n");
+    printf("       - if -A is chosen, you don't need to type anything after it. This will fetch, merge, add changes, commit and push with one command\n");
     printf("usage:\nupdate -a <filename> / . (to add all changes)\n");
     printf("update -a <filename> / . (to add all changes)\n");
     printf("update -c <comment/message>\n");
