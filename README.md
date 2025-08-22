@@ -37,8 +37,8 @@ proper usage:
 * update -f -m
 * update -a <filename/.> -c <comment/message> -p
 * update -A
-</pre>
 
 Important note:
 Make sure to fetch and merge before you work on any file.
 Push everytime you finish a file
+</pre>
