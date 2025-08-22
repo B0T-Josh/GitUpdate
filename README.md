@@ -1,6 +1,6 @@
 # GitUpdate
 
-## Important note. Study git first
+## Important note: Study git first
 
 ### Requirements:
 
