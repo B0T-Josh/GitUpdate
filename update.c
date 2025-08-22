@@ -4,6 +4,7 @@
 #include <stdbool.h>
 #include <string.h>
 
+
 bool addChange(char *file);
 bool commit(char *comment);
 bool pullOrigin();
