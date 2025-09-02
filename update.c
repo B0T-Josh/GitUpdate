@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <windows.h>
-#include <unistd.h>
 #include <stdbool.h>
 #include <string.h>
 
@@ -76,6 +75,7 @@ int main(int argc, char *argv[]) {
                     return 1;
                 }
             } else {
+                printf("Syntax error.\n");
                 printError();
                 return 1;
             }
@@ -104,6 +104,7 @@ int main(int argc, char *argv[]) {
                             return 1;
                         }
                     } else {
+                        printf("Syntax error.\n");
                         printError();
                         return 1;
                     }
