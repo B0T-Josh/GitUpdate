@@ -32,7 +32,7 @@ int main(int argc, char *argv[]) {
                 if(upload(argv[i+1])) {
                     printf("Push successful\n");
                 } else {
-                    printf("Failed to push to origin main\n"); 
+                    printf("Failed to push to origin %s\n", argv[i+1]); 
                     return 1;
                 }
             } else if(strncmp(argv[i], "-f", 2) == 0) {
@@ -128,7 +128,7 @@ bool addChange(char *file) {
 
 bool upload(char *branch) {
     char command[256];
-    sprintf(command, "git push origin -u origin %s", branch);
+    sprintf(command, "git push -u origin %s", branch);
     if(system(command) == 0) {
         return true;
     } else return false;
