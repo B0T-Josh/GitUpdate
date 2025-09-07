@@ -55,3 +55,9 @@ Push everytime you finish a file
 8. Click Ok and do the same on the path on the bottom side.
 9. Click Ok until all apps is closed.
 10. Open your CMD and type update. A guide should output when you type it.
+
+---------------------------------------------------------------------------------------------------------------------------------- 
+
+1. Download the zip file to your desired path.
+2. Unzip the zip file.
+3. Copy the update.exe and paste it on C:/Windows path.
