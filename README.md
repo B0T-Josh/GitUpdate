@@ -10,7 +10,7 @@
 ### Git basic usage:
 
 * git fetch origin //this connects your version to the online remote repository
-* git merge main //this merges the repository version to your local repository
+* git merge origin/main //this merges the repository version to your local repository
 * git pull //is a command that fetches and merge with the online remote repository
 * git add [file_name] //this loads the changes to be prepared to be committed
 * git commit -m [comment] //this saves your changes on your local repository
