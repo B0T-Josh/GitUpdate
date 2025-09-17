@@ -19,26 +19,33 @@
 
 ### Syntax
         update [command] [option]
+
 ### Command 
-        - ['-a', '-c', '-p', '-f', '-m', '-A']
+        ['-a', '-c', '-p', '-f', '-m', '-A', '-P']
+
 ### Option 
-        -a is chosen, type the name of the file that you wanted to add changes into.
-        -c is chosen, type the message for the commit.
-        -p is chosen, you need to type the branch to where you will push your work. This pushes your updates to the remote branch
-        -f is chosen, you need to type the branch that you want to fetch. This fetches updates from the remote branch
-        -m is chosen, you need to type the branch that you want to merge with. This merges your local repository with the updates from the remote branch
-        -A is chosen, you don't need to type anything after it. This will fetch, merge, add changes, commit and push with one command
+        - -a - type the name of the file that you wanted to add changes into.
+        - -c - type the message for the commit.
+        - -p - you need to type the branch to where you will push your work. This pushes your updates to the remote branch.
+        - -f - you need to type the branch that you want to fetch. This fetches updates from the remote branch.
+        - -m - you need to type the branch that you want to merge with. This merges your local repository with the updates from the remote branch.
+        - -A - you don't need to type anything after it. This will fetch, merge, add changes, commit and push with one command.
+        - -P - you need to type the branch that you want to fetch and merge. This fetches updates and merges it from the remote branch to your local repository.
+
 ### Usage:
-        update -a [filename] / . (to add all changes)
-        update -a [filename] / . (to add all changes)
-        update -c [comment/message]
-        update -p [branch]
-        update -f [branch]
-        update -m [branch]
+        - update -a [filename] / . (to add all changes)
+        - update -c [comment/message]
+        - update -p [branch]
+        - update -f [branch]
+        - update -m [branch]
+        - update -A [branch]
+        - update -P [branch]
+
 ### Proper usage:
-        update -f -m
-        update -a [filename/.] -c [comment/message] -p [branch]
-        update -A
+        - update -f [branch] -m [branch]
+        - update -a [filename/.] -c [comment/message] -p [branch]
+        - update -A [branch]
+        - update -P [branch]
 
 #### Important note:
 Make sure to fetch and merge before you work on any file.<br>
