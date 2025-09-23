@@ -41,12 +41,14 @@
         - update -m [branch]
         - update -A [branch]
         - update -P [branch]
+        - update -u [branch]
 
 ### Proper usage:
         - update -f [branch] -m [branch]
         - update -a [filename/.] -c [comment/message] -p [branch]
         - update -A [branch]
         - update -P [branch]
+        - update -u [branch]
 
 #### Important note:
 Make sure to fetch and merge before you work on any file.<br>
