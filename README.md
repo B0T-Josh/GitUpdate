@@ -21,7 +21,7 @@
         update [command] [option]
 
 ### Command 
-        ['-a', '-c', '-p', '-f', '-m', '-A', '-P']
+        ['-a', '-c', '-p', '-f', '-m', '-A', '-P', '-u']
 
 ### Option 
         - -a - type the name of the file that you wanted to add changes into.
@@ -31,6 +31,7 @@
         - -m - you need to type the branch that you want to merge with. This merges your local repository with the updates from the remote branch.
         - -A - you don't need to type anything after it. This will fetch, merge, add changes, commit and push with one command.
         - -P - you need to type the branch that you want to fetch and merge. This fetches updates and merges it from the remote branch to your local repository.
+        - -u - you need to type the branch that you want to use. This uses the branch version and makes you edit the content of that branch without harming or editing the other branches.
 
 ### Usage:
         - update -a [filename] / . (to add all changes)
