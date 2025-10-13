@@ -54,15 +54,11 @@ bool commit(char *comment) {
     } else return false;
 }
 
-bool updateAll(char *branch, char *file, char *comment, char *toBranch) {
-    if(fetch(branch)) {
-        if(merge(branch)) {
-            if(addChange(file)) {
-                if(commit(comment)) {
-                    if(upload(toBranch)) {
-                        return true;
-                    }
-                }
+bool updateAll(char *file, char *comment, char *toBranch) {
+    if(addChange(file)) {
+        if(commit(comment)) {
+            if(upload(toBranch)) {
+                return true;
             }
         }
     }
@@ -77,7 +73,7 @@ void printError() {
     printf("- -p - you need to type the branch to where you will push your work. This pushes your updates to the remote branch.\n\t");
     printf("- -f - you need to type the branch that you want to fetch. This fetches updates from the remote branch.\n\t");
     printf("- -m - you need to type the branch that you want to merge with. This merges your local repository with the updates from the remote branch.\n\t");
-    printf("- -A - you need to declare what branch you would fetch and merge, file name to add, commit message, branch name to push to. this will pull, add file, commit, and push using a single command.\n\t");
+    printf("- -A - you need to declare what file name to add, commit message, branch name to push to. this will add file, commit, and push using a single command.\n\t");
     printf("- -P - you need to type the branch that you want to fetch and merge. This fetches updates and merges it from the remote branch to your local repository.\n\t");
     printf("- -u - you need to type the branch that you want to use. This uses the branch version and makes you edit the content of that branch without harming or editing the other branches.\n");
     printf("Usage:\n\tupdate -a <filename> / . (to add all changes)\n\t");
@@ -86,12 +82,12 @@ void printError() {
     printf("- update -p [branch]\n\t");
     printf("- update -f [branch]\n\t");
     printf("- update -m [branch]\n\t");
-    printf("- update -A [branch] [filename] [comment] [to_branch]\n\t");
+    printf("- update -A [filename] [comment] [to_branch]\n\t");
     printf("- update -P [branch]\n");
     printf("Proper usage:\n\t");
     printf("- update -f [branch] -m [branch]\n\t");
     printf("- update -a [filename/.] -c [comment/message] -p [branch]\n\t");
-    printf("- update -A [branch] [filename] [comment] [to_branch]\n\t");
+    printf("- update -A [filename] [comment] [to_branch]\n\t");
     printf("- update -P [branch]\n\t");
     printf("- update -u [branch]\n");
     printf("\nImportant note:\nMake sure to fetch and merge before you work on any file.\n");
@@ -142,7 +138,7 @@ int start(int argc, char *argv[]) {
                     return 0;
                 }
             } else if(strncmp(argv[i], "-A", 2) == 0) {
-                if(updateAll(argv[i+1], argv[i+2], argv[i+3], argv[4])) {
+                if(updateAll(argv[i+1], argv[i+2], argv[i+3])) {
                     printf("Update all successful\n");
                 } else {
                     printf("Failed to update\n"); 
@@ -171,7 +167,6 @@ int start(int argc, char *argv[]) {
         }
         return 1;
     } else {
-        printError();
         return 0;
     }
 }
