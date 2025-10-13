@@ -29,7 +29,7 @@
         - -p - you need to type the branch to where you will push your work. This pushes your updates to the remote branch.
         - -f - you need to type the branch that you want to fetch. This fetches updates from the remote branch.
         - -m - you need to type the branch that you want to merge with. This merges your local repository with the updates from the remote branch.
-        - -A - you don't need to type anything after it. This will fetch, merge, add changes, commit and push with one command.
+        - -A - you need to declare what branch you would fetch and merge, file name to add, commit message, branch name to push to. this will pull, add file, commit, and push using a single command.
         - -P - you need to type the branch that you want to fetch and merge. This fetches updates and merges it from the remote branch to your local repository.
         - -u - you need to type the branch that you want to use. This uses the branch version and makes you edit the content of that branch without harming or editing the other branches.
 
@@ -39,14 +39,14 @@
         - update -p [branch]
         - update -f [branch]
         - update -m [branch]
-        - update -A [branch]
+        - update -A [branch] [filename] [comment] [to_branch]
         - update -P [branch]
         - update -u [branch]
 
 ### Proper usage:
         - update -f [branch] -m [branch]
         - update -a [filename/.] -c [comment/message] -p [branch]
-        - update -A [branch]
+        - update -A [branch] [filename] [comment] [to_branch]
         - update -P [branch]
         - update -u [branch]
 
