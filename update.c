@@ -138,12 +138,18 @@ int start(int argc, char *argv[]) {
                     return 0;
                 }
             } else if(strncmp(argv[i], "-A", 2) == 0) {
-                if(updateAll(argv[i+1], argv[i+2], argv[i+3])) {
-                    printf("Update all successful\n");
+                if(argv[i+1] != "(null)" && argv[i+2] != "(null)" && argv[i+3] != "(null)") {
+                    if(updateAll(argv[i+1], argv[i+2], argv[i+3])) {
+                        printf("Update all successful\n");
+                    } else {
+                        printf("Failed to update\n"); 
+                        return 0;
+                    }
                 } else {
-                    printf("Failed to update\n"); 
+                    printf("Syntax error.\n"); 
                     return 0;
                 }
+                
             } else if(strncmp(argv[i], "-P", 2) == 0) {
                 if(argv[i+1] == NULL) return 0;
                 if(fetch(argv[i+1])) {
