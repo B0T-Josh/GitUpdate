@@ -138,7 +138,7 @@ int start(int argc, char *argv[]) {
                     return 0;
                 }
             } else if(strncmp(argv[i], "-A", 2) == 0) {
-                if(argv[i+2] != "(null)") {
+                if(argv[i+2] != NULL) {
                     if(updateAll(argv[i+1], argv[i+2], argv[i+3])) {
                         printf("Update all successful\n");
                     } else {
