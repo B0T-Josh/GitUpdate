@@ -178,8 +178,10 @@ int start(int argc, char *argv[]) {
                             if(fetch(argv[i+3])) {
                                 if(merge(argv[i+3])) {
                                     if(upload(argv[i+4])) {
-                                        printf("Update and upload successful");
-                                        return 1;
+                                        if(use(argv[i+3])) {
+                                            printf("Update and upload successful");
+                                            return 1;
+                                        }
                                     }
                                 }
                             }
