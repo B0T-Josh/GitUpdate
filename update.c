@@ -140,7 +140,7 @@ int start(int argc, char *argv[]) {
                     printf("Failed to merge %s \n", argv[i+1]); 
                     return 0;
                 }
-            } else if(strncmp(argv[i], "-A", 2) == 0) {
+            } else if(strncmp(argv[i], "-A", 2) == 0) { 
                 if(argv[i+1] != NULL || argv[i+2] != NULL || argv[i+3] != NULL) {
                     if(updateAll(argv[i+1], argv[i+2], argv[i+3])) {
                         printf("Update all successful\n");
@@ -171,7 +171,7 @@ int start(int argc, char *argv[]) {
                     printf("Failed to use %s\n", argv[i+1]); 
                     return 0;
                 }
-            } else if(strncmp(argv[i], "-Ap", 3) == 0) {
+            } else if(strncmp(argv[i], "-b", 2) == 0) {
                 if(argv[i+1] != NULL || argv[i+2] != NULL || argv[i+3] != NULL || argv[i+4] != NULL) {
                     if(updateAll(argv[i+1], argv[i+2], argv[i+3])) {
                         if(use(argv[i+4])) {
