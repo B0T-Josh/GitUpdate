@@ -76,7 +76,7 @@ void printError() {
     printf("- -A - you need to declare what file name to add, commit message, branch name to push to. this will add file, commit, and push using a single command.\n\t");
     printf("- -P - you need to type the branch that you want to fetch and merge. This fetches updates and merges it from the remote branch to your local repository.\n\t");
     printf("- -u - you need to type the branch that you want to use. This uses the branch version and makes you edit the content of that branch without harming or editing the other branches.\n\t");
-    printf("- -Ap - you need to type the file to add, comment, branch to push to, and branch that should be updated too. this will add, commit, push, use the other branch, fetch and push to the branch.\n");
+    printf("- -b - you need to type the file to add, comment, branch to push to, and branch that should be updated too. this will add, commit, push, use the other branch, fetch and push to the branch.\n");
     printf("Usage:\n\tupdate -a <filename> / . (to add all changes)\n\t");
     printf("- update -a [filename] / . (to add all changes)\n\t");
     printf("- update -c [comment/message]\n\t");
@@ -85,14 +85,14 @@ void printError() {
     printf("- update -m [branch]\n\t");
     printf("- update -A [filename] [comment] [branch]\n\t");
     printf("- update -P [branch]\n\t");
-    printf("- update -Ap [filename/.] [comment] [branch] [toBranch]\n");
+    printf("- update -b [filename/.] [comment] [branch] [toBranch]\n");
     printf("Proper usage:\n\t");
     printf("- update -f [branch] -m [branch]\n\t");
     printf("- update -a [filename/.] -c [comment/message] -p [branch]\n\t");
     printf("- update -A [filename] [comment] [branch]\n\t");
     printf("- update -P [branch]\n\t");
     printf("- update -u [branch]\n\t");
-    printf("- update -Ap [filename/.] [comment] [branch] [toBranch]\n");
+    printf("- update -b [filename/.] [comment] [branch] [toBranch]\n");
     printf("\nImportant note:\nMake sure to fetch and merge before you work on any file.\n");
     printf("Push everytime you finish a file\n");
 }
