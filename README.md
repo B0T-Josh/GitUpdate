@@ -32,6 +32,7 @@
         - -A - you need to declare what file name to add, commit message, branch name to push to. this will add file, commit, and push using a single command.
         - -P - you need to type the branch that you want to fetch and merge. This fetches updates and merges it from the remote branch to your local repository.
         - -u - you need to type the branch that you want to use. This uses the branch version and makes you edit the content of that branch without harming or editing the other branches.
+        - -Ap - you need to type the file to add, comment, branch to push to, and branch that should be updated too. this will add, commit, push, use the other branch, fetch and push to the branch. 
 
 ### Usage:
         - update -a [filename] / . (to add all changes)
@@ -42,6 +43,7 @@
         - update -A [filename] [comment] [to_branch]
         - update -P [branch]
         - update -u [branch]
+        - update -Ap [filename/.] [comment] [branch] [toBranch]
 
 ### Proper usage:
         - update -f [branch] -m [branch]
@@ -49,6 +51,7 @@
         - update -A [filename] [comment] [to_branch]
         - update -P [branch]
         - update -u [branch]
+        - update -Ap [filename/.] [comment] [branch] [toBranch]
 
 #### Important note:
 Make sure to fetch and merge before you work on any file.<br>
