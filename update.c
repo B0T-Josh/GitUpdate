@@ -75,21 +75,24 @@ void printError() {
     printf("- -m - you need to type the branch that you want to merge with. This merges your local repository with the updates from the remote branch.\n\t");
     printf("- -A - you need to declare what file name to add, commit message, branch name to push to. this will add file, commit, and push using a single command.\n\t");
     printf("- -P - you need to type the branch that you want to fetch and merge. This fetches updates and merges it from the remote branch to your local repository.\n\t");
-    printf("- -u - you need to type the branch that you want to use. This uses the branch version and makes you edit the content of that branch without harming or editing the other branches.\n");
+    printf("- -u - you need to type the branch that you want to use. This uses the branch version and makes you edit the content of that branch without harming or editing the other branches.\n\t");
+    printf("- -Ap - you need to type the file to add, comment, branch to push to, and branch that should be updated too. this will add, commit, push, use the other branch, fetch and push to the branch.\n");
     printf("Usage:\n\tupdate -a <filename> / . (to add all changes)\n\t");
     printf("- update -a [filename] / . (to add all changes)\n\t");
     printf("- update -c [comment/message]\n\t");
     printf("- update -p [branch]\n\t");
     printf("- update -f [branch]\n\t");
     printf("- update -m [branch]\n\t");
-    printf("- update -A [filename] [comment] [to_branch]\n\t");
-    printf("- update -P [branch]\n");
+    printf("- update -A [filename] [comment] [branch]\n\t");
+    printf("- update -P [branch]\n\t");
+    printf("- update -Ap [filename/.] [comment] [branch] [toBranch]\n");
     printf("Proper usage:\n\t");
     printf("- update -f [branch] -m [branch]\n\t");
     printf("- update -a [filename/.] -c [comment/message] -p [branch]\n\t");
-    printf("- update -A [filename] [comment] [to_branch]\n\t");
+    printf("- update -A [filename] [comment] [branch]\n\t");
     printf("- update -P [branch]\n\t");
-    printf("- update -u [branch]\n");
+    printf("- update -u [branch]\n\t");
+    printf("- update -Ap [filename/.] [comment] [branch] [toBranch]\n");
     printf("\nImportant note:\nMake sure to fetch and merge before you work on any file.\n");
     printf("Push everytime you finish a file\n");
 }
@@ -138,7 +141,7 @@ int start(int argc, char *argv[]) {
                     return 0;
                 }
             } else if(strncmp(argv[i], "-A", 2) == 0) {
-                if(argv[i+1] == NULL || argv[i+2] != NULL || argv[i+3] == NULL) {
+                if(argv[i+1] != NULL || argv[i+2] != NULL || argv[i+3] != NULL) {
                     if(updateAll(argv[i+1], argv[i+2], argv[i+3])) {
                         printf("Update all successful\n");
                     } else {
@@ -149,7 +152,6 @@ int start(int argc, char *argv[]) {
                     printf("Syntax error.\n"); 
                     return 0;
                 }
-                
             } else if(strncmp(argv[i], "-P", 2) == 0) {
                 if(argv[i+1] == NULL) return 0;
                 if(fetch(argv[i+1])) {
@@ -169,7 +171,27 @@ int start(int argc, char *argv[]) {
                     printf("Failed to use %s\n", argv[i+1]); 
                     return 0;
                 }
-            } 
+            } else if(strncmp(argv[i], "-Ap", 3) == 0) {
+                if(argv[i+1] != NULL || argv[i+2] != NULL || argv[i+3] != NULL || argv[i+4] != NULL) {
+                    if(updateAll(argv[i+1], argv[i+2], argv[i+3])) {
+                        if(use(argv[i+4])) {
+                            if(fetch(argv[i+3])) {
+                                if(merge(argv[i+3])) {
+                                    if(upload(argv[i+4])) {
+                                        printf("Update and upload successful");
+                                        return 1;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    printf("Failed to update\n"); 
+                    return 0;
+                } else {
+                    printf("Syntax error.\n"); 
+                    return 0;
+                }
+            }
         }
         return 1;
     } else {
