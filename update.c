@@ -55,13 +55,16 @@ bool commit(char *comment) {
 }
 
 bool updateAll(char *file, char *comment, char *toBranch) {
-    if(addChange(file)) {
-        if(commit(comment)) {
-            if(upload(toBranch)) {
-                return true;
+    if(use(toBranch)){
+        if(addChange(file)) {
+            if(commit(comment)) {
+                if(upload(toBranch)) {
+                    return true;
+                }
             }
         }
     }
+    
     return false;
 }
 
