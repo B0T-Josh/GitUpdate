@@ -80,7 +80,7 @@ void printError() {
     printf("- -P - you need to type the branch that you want to fetch and merge. This fetches updates and merges it from the remote branch to your local repository.\n\t");
     printf("- -u - you need to type the branch that you want to use. This uses the branch version and makes you edit the content of that branch without harming or editing the other branches.\n\t");
     printf("- -b - you need to type the file to add, comment, branch to push to, and branch that should be updated too. this will add, commit, push, use the other branch, fetch and push to the branch.\n");
-    printf("Usage:\n\tupdate -a <filename> / . (to add all changes)\n\t");
+    printf("Usage:\n\t");
     printf("- update -a [filename] / . (to add all changes)\n\t");
     printf("- update -c [comment/message]\n\t");
     printf("- update -p [branch]\n\t");
