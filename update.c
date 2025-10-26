@@ -70,7 +70,7 @@ bool updateAll(char *file, char *comment, char *toBranch) {
 
 void printError() {
     printf("Syntax:\n\tupdate [command] [option]\n"); 
-    printf("Command\n\t['-a', '-c', '-p', '-f', '-m', '-A', '-P', '-u']\n");
+    printf("Command\n\t['-a', '-c', '-p', '-f', '-m', '-A', '-P', '-u', '-b']\n");
     printf("Option\n\t- -a - type the name of the file that you wanted to add changes into.\n\t");
     printf("- -c - type the message for the commit.\n\t");
     printf("- -p - you need to type the branch to where you will push your work. This pushes your updates to the remote branch.\n\t");
