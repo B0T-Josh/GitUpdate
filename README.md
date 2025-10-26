@@ -21,7 +21,7 @@
         update [command] [option]
 
 ### Command 
-        ['-a', '-c', '-p', '-f', '-m', '-A', '-P', '-u']
+        ['-a', '-c', '-p', '-f', '-m', '-A', '-P', '-u', '-b']
 
 ### Option 
         - -a - type the name of the file that you wanted to add changes into.
