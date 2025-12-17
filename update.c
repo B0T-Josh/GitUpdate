@@ -89,7 +89,7 @@ void printError() {
     printf("- -A - you need to declare what file name to add, commit message, branch name to push to. this will add file, commit, and push using a single command.\n\t");
     printf("- -P - you need to type the branch that you want to fetch and merge. This fetches updates and merges it from the remote branch to your local repository.\n\t");
     printf("- -u - you need to type the branch that you want to use. This uses the branch version and makes you edit the content of that branch without harming or editing the other branches.\n\t");
-    printf("- -b - you need to type the file to add, comment, branch to push to, and branch that should be updated too. this will add, commit, push, use the other branch, fetch and push to the branch.\n");
+    printf("- -b - you need to type the file to add, comment, branch to push to, and branch that should be updated too. this will add, commit, push, use the other branch, fetch and push to the branch.\n\t");
     printf("- -g - you need to type if it is --rebase or --abort by typing 're' or 'ab'. if you'll just do normal pull, just type nothing after. you also must declare a branch to pull from after setting the option.\n");
     printf("Usage:\n\t");
     printf("- update -a [filename] / . (to add all changes)\n\t");
@@ -225,6 +225,18 @@ int start(int argc, char *argv[]) {
                 } else if(strncmp(argv[i+1], "ab", 2)) {
                     if(argv[i+2] != NULL) {
                         if(get(argv[i+2], argv[i+1])) {
+                            printf("Pull successful\n");
+                        } else {
+                            printf("Pull unsuccessful\n");
+                            return 0;
+                        }
+                    } else {
+                        printf("Pull failed. You must declare a branch\n");
+                        return 1;
+                    }
+                } else {
+                    if(argv[i+1] != NULL) {
+                        if(get(argv[i+1], NULL)) {
                             printf("Pull successful\n");
                         } else {
                             printf("Pull unsuccessful\n");
