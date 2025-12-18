@@ -21,7 +21,7 @@
         update [command] [option]
 
 ### Command 
-        ['-a', '-c', '-p', '-f', '-m', '-A', '-P', '-u']
+        ['-a', '-c', '-p', '-f', '-m', '-A', '-P', '-u', '-b', '-g']
 
 ### Option 
         - -a - type the name of the file that you wanted to add changes into.
@@ -33,6 +33,7 @@
         - -P - you need to type the branch that you want to fetch and merge. This fetches updates and merges it from the remote branch to your local repository.
         - -u - you need to type the branch that you want to use. This uses the branch version and makes you edit the content of that branch without harming or editing the other branches.
         - -b - you need to type the file to add, comment, branch to push to, and branch that should be updated too. this will add, commit, push, use the other branch, fetch and push to the branch. 
+        - -g - you need to type if it is --rebase or --abort by typing 're' or 'ab'. if you'll just do normal pull, just type nothing after. you also must declare a branch to pull from after setting the option.
 
 ### Usage:
         - update -a [filename] / . (to add all changes)
@@ -44,6 +45,7 @@
         - update -P [branch]
         - update -u [branch]
         - update -b [filename/.] [comment] [branch] [toBranch]
+        - update -g [re/ab/{blank}] [branch]
 
 ### Proper usage:
         - update -f [branch] -m [branch]
@@ -52,6 +54,7 @@
         - update -P [branch]
         - update -u [branch]
         - update -b [filename/.] [comment] [branch] [toBranch]
+        - update -g [re/ab/{blank}] [branch]
 
 #### Important note:
 Make sure to fetch and merge before you work on any file.<br>

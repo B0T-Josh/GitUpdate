@@ -68,9 +68,19 @@ bool updateAll(char *file, char *comment, char *toBranch) {
     return false;
 }
 
+bool get(char *branch, char* option) {
+    char buffer[256];
+    char opt[50] = "";
+    if(strlen(option) > 0 && option == "re") strcpy(opt, "--rebase"); 
+    else if(strlen(option) > 0 && option == "ab") strcpy(opt, "--abort");
+    sprintf(buffer, "git pull origin %s %s", opt, branch);
+    if(system(buffer) == 0) return true;
+    else false; 
+}
+
 void printError() {
     printf("Syntax:\n\tupdate [command] [option]\n"); 
-    printf("Command\n\t['-a', '-c', '-p', '-f', '-m', '-A', '-P', '-u']\n");
+    printf("Command\n\t['-a', '-c', '-p', '-f', '-m', '-A', '-P', '-u', '-b', '-g']\n");
     printf("Option\n\t- -a - type the name of the file that you wanted to add changes into.\n\t");
     printf("- -c - type the message for the commit.\n\t");
     printf("- -p - you need to type the branch to where you will push your work. This pushes your updates to the remote branch.\n\t");
@@ -79,8 +89,9 @@ void printError() {
     printf("- -A - you need to declare what file name to add, commit message, branch name to push to. this will add file, commit, and push using a single command.\n\t");
     printf("- -P - you need to type the branch that you want to fetch and merge. This fetches updates and merges it from the remote branch to your local repository.\n\t");
     printf("- -u - you need to type the branch that you want to use. This uses the branch version and makes you edit the content of that branch without harming or editing the other branches.\n\t");
-    printf("- -b - you need to type the file to add, comment, branch to push to, and branch that should be updated too. this will add, commit, push, use the other branch, fetch and push to the branch.\n");
-    printf("Usage:\n\tupdate -a <filename> / . (to add all changes)\n\t");
+    printf("- -b - you need to type the file to add, comment, branch to push to, and branch that should be updated too. this will add, commit, push, use the other branch, fetch and push to the branch.\n\t");
+    printf("- -g - you need to type if it is --rebase or --abort by typing 're' or 'ab'. if you'll just do normal pull, just type nothing after. you also must declare a branch to pull from after setting the option.\n");
+    printf("Usage:\n\t");
     printf("- update -a [filename] / . (to add all changes)\n\t");
     printf("- update -c [comment/message]\n\t");
     printf("- update -p [branch]\n\t");
@@ -89,13 +100,15 @@ void printError() {
     printf("- update -A [filename] [comment] [branch]\n\t");
     printf("- update -P [branch]\n\t");
     printf("- update -b [filename/.] [comment] [branch] [toBranch]\n");
+    printf("- update -g [re/ab/{blank}] [branch]\n");
     printf("Proper usage:\n\t");
     printf("- update -f [branch] -m [branch]\n\t");
     printf("- update -a [filename/.] -c [comment/message] -p [branch]\n\t");
     printf("- update -A [filename] [comment] [branch]\n\t");
     printf("- update -P [branch]\n\t");
     printf("- update -u [branch]\n\t");
-    printf("- update -b [filename/.] [comment] [branch] [toBranch]\n");
+    printf("- update -b [filename/.] [comment] [branch] [toBranch]\n\t");
+    printf("- update -g [re/ab/{blank}] [branch]\n");
     printf("\nImportant note:\nMake sure to fetch and merge before you work on any file.\n");
     printf("Push everytime you finish a file\n");
 }
@@ -182,7 +195,7 @@ int start(int argc, char *argv[]) {
                                 if(merge(argv[i+3])) {
                                     if(upload(argv[i+4])) {
                                         if(use(argv[i+3])) {
-                                            printf("Update and upload successful");
+                                            printf("Update and upload successful\n");
                                             return 1;
                                         }
                                     }
@@ -195,6 +208,44 @@ int start(int argc, char *argv[]) {
                 } else {
                     printf("Syntax error.\n"); 
                     return 0;
+                }
+            } else if(strncmp(argv[i], "-g", 2) == 0) {  
+                if(strncmp(argv[i+1], "re", 2) == 0) {
+                    if(argv[i+2] != NULL) {
+                        if(get(argv[i+2], argv[i+1])) {
+                            printf("Pull successful\n");
+                        } else {
+                            printf("Pull unsuccessful\n");
+                            return 0;
+                        }
+                    } else {
+                        printf("Pull failed. You must declare a branch\n");
+                        return 1;
+                    }
+                } else if(strncmp(argv[i+1], "ab", 2)) {
+                    if(argv[i+2] != NULL) {
+                        if(get(argv[i+2], argv[i+1])) {
+                            printf("Pull successful\n");
+                        } else {
+                            printf("Pull unsuccessful\n");
+                            return 0;
+                        }
+                    } else {
+                        printf("Pull failed. You must declare a branch\n");
+                        return 1;
+                    }
+                } else {
+                    if(argv[i+1] != NULL) {
+                        if(get(argv[i+1], NULL)) {
+                            printf("Pull successful\n");
+                        } else {
+                            printf("Pull unsuccessful\n");
+                            return 0;
+                        }
+                    } else {
+                        printf("Pull failed. You must declare a branch\n");
+                        return 1;
+                    }
                 }
             }
         }
