@@ -65,9 +65,16 @@ class Update
             Console.Clear();
             print("Enter branch name: ");
             string branch = Console.ReadLine() ?? "";
-            query = $"/c git pull origin {branch}";
+            query = $"/c git pull origin {branch} --rebase";
         }
         else if(i == 2) query = "/c git merge --abort";
+        else if(i == 3)
+        {
+            Console.Clear();
+            print("Enter branch name: ");
+            string branch = Console.ReadLine() ?? "";
+            query = $"/c git pull origin {branch}";
+        }
         proc.StartInfo.FileName = "cmd.exe";
         proc.StartInfo.Arguments = query;
         proc.StartInfo.Verb = "runas";
@@ -280,7 +287,8 @@ Option
     - -P - you need to type the branch that you want to fetch and merge. This fetches updates and merges it from the remote branch to your local repository.
     - -u - you need to type the branch that you want to use. This uses the branch version and makes you edit the content of that branch without harming or editing the other branches.
     - -b - you need to type the file to add, comment, branch to push to, and branch that should be updated too. this will add, commit, push, use the other branch, fetch and push to the branch.
-    - -g - you need to type if it is --rebase or --abort by typing 're' or 'ab'. if you'll just do normal pull, just type nothing after. you also must declare a branch to pull from after setting the option.
+    - -g - you will be asked if you want to do a --rebase, --abort, or None . if you chose --rebase, you will be asked for input of what branch that you want to pull. if --abort, you will
+          undo the merge that you have done earlier. if None, you will be asked what branch do you want to pull. 
 Usage:
     - update -a [filename] / . (to add all changes)
     - update -c [comment/message]
@@ -298,7 +306,7 @@ Proper usage:
     - update -P [branch]
     - update -u [branch]
     - update -b [filename/.] [comment] [branch] [toBranch]
-    - update -g [branch]
+    - update -g 
 
 Important note:
 Make sure to fetch and merge before you work on any file.
