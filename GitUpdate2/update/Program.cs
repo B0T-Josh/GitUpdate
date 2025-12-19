@@ -62,17 +62,25 @@ class Update
         } while(key.Key != ConsoleKey.Enter);
         if(i == 1)
         {
-            Console.Clear();
-            print("Enter branch name: ");
-            string branch = Console.ReadLine() ?? "";
+            string branch = null;
+            do
+            {
+                Console.Clear();
+                print("Enter branch name: ");   
+                branch = Console.ReadLine();
+            } while(branch == null);
             query = $"/c git pull origin {branch} --rebase";
         }
         else if(i == 2) query = "/c git merge --abort";
         else if(i == 3)
         {
-            Console.Clear();
-            print("Enter branch name: ");
-            string branch = Console.ReadLine() ?? "";
+            string branch = null;
+            do
+            {
+                Console.Clear();
+                print("Enter branch name: ");   
+                branch = Console.ReadLine();
+            } while(branch == null); 
             query = $"/c git pull origin {branch}";
         }
         proc.StartInfo.FileName = "cmd.exe";
