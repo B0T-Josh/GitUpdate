@@ -501,22 +501,29 @@ Push everytime you finish a file
                 {
                     if(args[i+1] != null)
                     {
-                        if(add(args[i+1]))
+                        if(use(args[i+3]))
                         {
-                            if(commit(args[i+2]))
+                            if(add(args[i+1]))
                             {
-                                if(push(args[i+3]))
+                                if(commit(args[i+2]))
                                 {
-                                    if(use(args[i+4]))
+                                    if(push(args[i+3]))
                                     {
-                                        if(pull(args[i+3]))
+                                        if(use(args[i+4]))
                                         {
-                                            print("Pull successful\n");   
+                                            if(pull(args[i+3]))
+                                            {
+                                                print("Pull successful\n");   
+                                            } 
+                                            else
+                                            {
+                                                print("Use unsuccessful\n");
+                                            }  
                                         } 
                                         else
                                         {
-                                            print("Pull unsuccessful\n");
-                                        }  
+                                            print("Push unsuccessful\n");
+                                        }
                                     } 
                                     else
                                     {
@@ -525,17 +532,17 @@ Push everytime you finish a file
                                 } 
                                 else
                                 {
-                                    print("Push unsuccessful\n");
+                                    print("Commit unsuccessful\n");
                                 }
                             } 
                             else
                             {
-                                print("Commit unsuccessful\n");
+                                print("Add unsuccessful\n");
                             }
-                        } 
+                        }
                         else
                         {
-                            print("Add unsuccessful\n");
+                            print("Use unsuccessful");
                         }
                     } 
                     else
