@@ -22,6 +22,7 @@ class Update
                 Console.ForegroundColor = ConsoleColor.White;
                 print("--abort\n");
                 print("None\n");
+                print("Press enter to confirm.\n");
             }
             else if(index == 2)
             {
@@ -31,6 +32,7 @@ class Update
                 print("--abort <=\n");
                 Console.ForegroundColor = ConsoleColor.White;
                 print("None\n");
+                print("Press enter to confirm.\n");
             } 
             else if(index == 3)
             {
@@ -40,6 +42,7 @@ class Update
                 Console.ForegroundColor = ConsoleColor.Blue;
                 print("None <=\n");
                 Console.ForegroundColor = ConsoleColor.White;
+                print("Press enter to confirm.\n");
             }
         }        
     }
@@ -287,7 +290,7 @@ Usage:
     - update -A [filename] [comment] [branch]
     - update -P [branch]
     - update -b [filename/.] [comment] [branch] [toBranch]
-    - update -g [re/ab/{blank}] [branch]
+    - update -g [branch]
 Proper usage:
     - update -f [branch] -m [branch]
     - update -a [filename/.] -c [comment/message] -p [branch]
@@ -295,7 +298,7 @@ Proper usage:
     - update -P [branch]
     - update -u [branch]
     - update -b [filename/.] [comment] [branch] [toBranch]
-    - update -g [re/ab/{blank}] [branch]
+    - update -g [branch]
 
 Important note:
 Make sure to fetch and merge before you work on any file.
