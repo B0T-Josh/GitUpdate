@@ -562,6 +562,26 @@ Push everytime you finish a file
                         break;
                     }
                 }
+                if(args[i] == "-u")
+                {
+                    if(args[i+1] != null)
+                    {
+                        if(use(args[i+1]))
+                        {
+                            print("Use successful");
+                        } 
+                        else
+                        {
+                            print("Use unsuccessful\n");
+                        }
+                    }
+                    else
+                    {
+                        print("Syntax error.\n");
+                        printErr();
+                        break;
+                    }
+                }
             }
         }
     }
