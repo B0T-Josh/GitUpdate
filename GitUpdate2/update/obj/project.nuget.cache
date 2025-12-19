@@ -1,14 +1,15 @@
 {
   "version": 2,
-<<<<<<< HEAD
   "dgSpecHash": "+UZo1Dwl9ys=",
   "success": true,
   "projectFilePath": "C:\\Users\\jbsan\\Documents\\GitHub\\GitUpdate\\GitUpdate2\\update\\update.csproj",
-=======
-  "dgSpecHash": "GeXZE7PTAJY=",
-  "success": true,
-  "projectFilePath": "c:\\Users\\jbsan\\Documents\\GitHub\\GitUpdate\\GitUpdate2\\update\\update.csproj",
->>>>>>> origin/main
   "expectedPackageFiles": [],
-  "logs": []
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file C:\\Users\\jbsan\\Documents\\GitHub\\GitUpdate\\GitUpdate2\\update\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }

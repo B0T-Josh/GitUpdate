@@ -46,15 +46,10 @@ class Update
             }
         }        
     }
-    static bool pull(string branch)
+    static bool pull()
     {
-        if(branch == null)
-        {
-            print("Missing branch name\n");
-            return false;
-        }
         Process proc = new Process();
-        string query = $"/c git pull origin {branch}";
+        string query = "";
         int i = 1;
         setChoice("pull", i);
         do {
@@ -65,9 +60,29 @@ class Update
             else if(i < 1) i = 3;
             setChoice("pull", i);
         } while(key.Key != ConsoleKey.Enter);
-        if(i == 1) query = query + " --rebase";
-        else if(i == 2) query = query + " --abort";
-        
+        if(i == 1)
+        {
+            string branch = null;
+            do
+            {
+                Console.Clear();
+                print("Enter branch name: ");   
+                branch = Console.ReadLine();
+            } while(branch == null);
+            query = $"/c git pull origin {branch} --rebase";
+        }
+        else if(i == 2) query = "/c git merge --abort";
+        else if(i == 3)
+        {
+            string branch = null;
+            do
+            {
+                Console.Clear();
+                print("Enter branch name: ");   
+                branch = Console.ReadLine();
+            } while(branch == null); 
+            query = $"/c git pull origin {branch}";
+        }
         proc.StartInfo.FileName = "cmd.exe";
         proc.StartInfo.Arguments = query;
         proc.StartInfo.Verb = "runas";
@@ -280,7 +295,8 @@ Option
     - -P - you need to type the branch that you want to fetch and merge. This fetches updates and merges it from the remote branch to your local repository.
     - -u - you need to type the branch that you want to use. This uses the branch version and makes you edit the content of that branch without harming or editing the other branches.
     - -b - you need to type the file to add, comment, branch to push to, and branch that should be updated too. this will add, commit, push, use the other branch, fetch and push to the branch.
-    - -g - you need to type if it is --rebase or --abort by typing 're' or 'ab'. if you'll just do normal pull, just type nothing after. you also must declare a branch to pull from after setting the option.
+    - -g - you will be asked if you want to do a --rebase, --abort, or None . if you chose --rebase, you will be asked for input of what branch that you want to pull. if --abort, you will
+          undo the merge that you have done earlier. if None, you will be asked what branch do you want to pull. 
 Usage:
     - update -a [filename] / . (to add all changes)
     - update -c [comment/message]
@@ -298,7 +314,7 @@ Proper usage:
     - update -P [branch]
     - update -u [branch]
     - update -b [filename/.] [comment] [branch] [toBranch]
-    - update -g [branch]
+    - update -g 
 
 Important note:
 Make sure to fetch and merge before you work on any file.
@@ -501,22 +517,50 @@ Push everytime you finish a file
                 {
                     if(args[i+1] != null)
                     {
-                        if(add(args[i+1]))
+                        if(use(args[i+3]))
                         {
-                            if(commit(args[i+2]))
+                            if(add(args[i+1]))
                             {
-                                if(push(args[i+3]))
+                                if(commit(args[i+2]))
                                 {
-                                    if(use(args[i+4]))
+                                    if(push(args[i+3]))
                                     {
-                                        if(pull(args[i+3]))
+                                        if(use(args[i+4]))
                                         {
-                                            print("Pull successful\n");   
+                                            if(fetch(args[i+3]))
+                                            {
+                                                if(merge(args[i+3]))
+                                                {
+                                                    if(push(args[i+4]))
+                                                    {
+                                                        if(use(args[i+3]))
+                                                        {
+                                                            print("Use successful\n");
+                                                        }
+                                                        else
+                                                        {
+                                                            print("Use unsuccessful\n");
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        print("Push unsuccessful\n");
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    print("Merge unsuccessful\n");
+                                                }
+                                            } 
+                                            else
+                                            {
+                                                print("Fetch unsuccessful\n");
+                                            }  
                                         } 
                                         else
                                         {
-                                            print("Pull unsuccessful\n");
-                                        }  
+                                            print("Push unsuccessful\n");
+                                        }
                                     } 
                                     else
                                     {
@@ -525,17 +569,17 @@ Push everytime you finish a file
                                 } 
                                 else
                                 {
-                                    print("Push unsuccessful\n");
+                                    print("Commit unsuccessful\n");
                                 }
                             } 
                             else
                             {
-                                print("Commit unsuccessful\n");
+                                print("Add unsuccessful\n");
                             }
-                        } 
+                        }
                         else
                         {
-                            print("Add unsuccessful\n");
+                            print("Use unsuccessful");
                         }
                     } 
                     else
@@ -549,7 +593,7 @@ Push everytime you finish a file
                 {
                     if(args[i+1] != null)
                     {
-                        if(pull(args[i+1]))
+                        if(pull())
                         {
                             print("Pull successful");
                         } 
