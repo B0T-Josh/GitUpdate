@@ -46,15 +46,10 @@ class Update
             }
         }        
     }
-    static bool pull(string branch)
+    static bool pull()
     {
-        if(branch == null)
-        {
-            print("Missing branch name\n");
-            return false;
-        }
         Process proc = new Process();
-        string query = $"/c git pull origin {branch}";
+        string query = "";
         int i = 1;
         setChoice("pull", i);
         do {
@@ -65,9 +60,14 @@ class Update
             else if(i < 1) i = 3;
             setChoice("pull", i);
         } while(key.Key != ConsoleKey.Enter);
-        if(i == 1) query = query + " --rebase";
-        else if(i == 2) query = query + " --abort";
-        
+        if(i == 1)
+        {
+            Console.Clear();
+            print("Enter branch name: ");
+            string branch = Console.ReadLine() ?? "";
+            query = $"/c git pull origin {branch}";
+        }
+        else if(i == 2) query = "/c git merge --abort";
         proc.StartInfo.FileName = "cmd.exe";
         proc.StartInfo.Arguments = query;
         proc.StartInfo.Verb = "runas";
@@ -511,13 +511,34 @@ Push everytime you finish a file
                                     {
                                         if(use(args[i+4]))
                                         {
-                                            if(pull(args[i+3]))
+                                            if(fetch(args[i+3]))
                                             {
-                                                print("Pull successful\n");   
+                                                if(merge(args[i+3]))
+                                                {
+                                                    if(push(args[i+4]))
+                                                    {
+                                                        if(use(args[i+3]))
+                                                        {
+                                                            print("Use successful\n");
+                                                        }
+                                                        else
+                                                        {
+                                                            print("Use unsuccessful\n");
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        print("Push unsuccessful\n");
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    print("Merge unsuccessful\n");
+                                                }
                                             } 
                                             else
                                             {
-                                                print("Use unsuccessful\n");
+                                                print("Fetch unsuccessful\n");
                                             }  
                                         } 
                                         else
@@ -556,7 +577,7 @@ Push everytime you finish a file
                 {
                     if(args[i+1] != null)
                     {
-                        if(pull(args[i+1]))
+                        if(pull())
                         {
                             print("Pull successful");
                         } 

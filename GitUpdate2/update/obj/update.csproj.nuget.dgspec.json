@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\jbsan\\Documents\\GitHub\\GitUpdate\\GitUpdate2\\update\\update.csproj": {}
+    "c:\\Users\\jbsan\\Documents\\GitHub\\GitUpdate\\GitUpdate2\\update\\update.csproj": {}
   },
   "projects": {
-    "C:\\Users\\jbsan\\Documents\\GitHub\\GitUpdate\\GitUpdate2\\update\\update.csproj": {
+    "c:\\Users\\jbsan\\Documents\\GitHub\\GitUpdate\\GitUpdate2\\update\\update.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jbsan\\Documents\\GitHub\\GitUpdate\\GitUpdate2\\update\\update.csproj",
+        "projectUniqueName": "c:\\Users\\jbsan\\Documents\\GitHub\\GitUpdate\\GitUpdate2\\update\\update.csproj",
         "projectName": "update",
-        "projectPath": "C:\\Users\\jbsan\\Documents\\GitHub\\GitUpdate\\GitUpdate2\\update\\update.csproj",
+        "projectPath": "c:\\Users\\jbsan\\Documents\\GitHub\\GitUpdate\\GitUpdate2\\update\\update.csproj",
         "packagesPath": "C:\\Users\\jbsan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jbsan\\Documents\\GitHub\\GitUpdate\\GitUpdate2\\update\\obj\\",
+        "outputPath": "c:\\Users\\jbsan\\Documents\\GitHub\\GitUpdate\\GitUpdate2\\update\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\jbsan\\AppData\\Roaming\\NuGet\\NuGet.Config"
