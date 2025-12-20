@@ -70,10 +70,9 @@ bool updateAll(char *file, char *comment, char *toBranch) {
 
 bool get(char *branch, char* option) {
     char buffer[256];
-    char opt[50] = "";
-    if(strlen(option) > 0 && option == "re") strcpy(opt, "--rebase"); 
-    else if(strlen(option) > 0 && option == "ab") strcpy(opt, "--abort");
-    sprintf(buffer, "git pull origin %s %s", opt, branch);
+    if(strlen(option) > 0 && option == "re") sprintf(buffer, "git pull origin %s --rebase", branch); 
+    else if(strlen(option) > 0 && option == "ab") strcpy(buffer, "git merge --abort");
+    else if(option == NULL) sprintf(buffer, "git pull origin %s", branch);
     if(system(buffer) == 0) return true;
     else false; 
 }
