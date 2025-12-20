@@ -324,7 +324,7 @@ Push everytime you finish a file
 
     static void Main(String[] args)
     {
-        if(args.Length < 2)
+        if(args.Length < 1)
         {
             printErr();
         }
@@ -591,22 +591,13 @@ Push everytime you finish a file
                 }
                 if(args[i] == "-g")
                 {
-                    if(args[i+1] != null)
+                    if(pull())
                     {
-                        if(pull())
-                        {
-                            print("Pull successful");
-                        } 
-                        else
-                        {
-                            print("Pull unsuccessful\n");
-                        }
+                        print("Pull successful");
                     } 
                     else
                     {
-                        print("Syntax error.\n");
-                        printErr();
-                        break;
+                        print("Pull unsuccessful\n");
                     }
                 }
                 if(args[i] == "-u")
