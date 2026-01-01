@@ -1,7 +1,6 @@
 {
   "format": 1,
   "restore": {
-<<<<<<< HEAD
     "C:\\Users\\jbsan\\OneDrive\\Documents\\GitHub\\GitUpdate\\GitUpdate2\\update\\update.csproj": {}
   },
   "projects": {
@@ -21,32 +20,13 @@
           "C:\\Users\\jbsan\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
-=======
-    "C:\\Users\\jbsan\\Documents\\GitHub\\GitUpdate\\GitUpdate2\\update\\update.csproj": {}
-  },
-  "projects": {
-    "C:\\Users\\jbsan\\Documents\\GitHub\\GitUpdate\\GitUpdate2\\update\\update.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "C:\\Users\\jbsan\\Documents\\GitHub\\GitUpdate\\GitUpdate2\\update\\update.csproj",
-        "projectName": "update",
-        "projectPath": "C:\\Users\\jbsan\\Documents\\GitHub\\GitUpdate\\GitUpdate2\\update\\update.csproj",
-        "packagesPath": "C:\\Users\\jbsan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jbsan\\Documents\\GitHub\\GitUpdate\\GitUpdate2\\update\\obj\\",
-        "projectStyle": "PackageReference",
-        "configFilePaths": [
-          "C:\\Users\\jbsan\\AppData\\Roaming\\NuGet\\NuGet.Config"
->>>>>>> origin/main
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-<<<<<<< HEAD
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
-=======
->>>>>>> origin/main
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -64,12 +44,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-<<<<<<< HEAD
         },
         "SdkAnalysisLevel": "9.0.300"
-=======
-        }
->>>>>>> origin/main
       },
       "frameworks": {
         "net8.0": {
@@ -90,11 +66,7 @@
               "privateAssets": "all"
             }
           },
-<<<<<<< HEAD
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
-=======
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.412/PortableRuntimeIdentifierGraph.json"
->>>>>>> origin/main
         }
       }
     }

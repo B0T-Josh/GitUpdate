@@ -1,14 +1,18 @@
 {
   "version": 2,
-<<<<<<< HEAD
   "dgSpecHash": "uwoOcXn49Ms=",
   "success": true,
   "projectFilePath": "C:\\Users\\jbsan\\OneDrive\\Documents\\GitHub\\GitUpdate\\GitUpdate2\\update\\update.csproj",
-=======
-  "dgSpecHash": "+UZo1Dwl9ys=",
-  "success": true,
-  "projectFilePath": "C:\\Users\\jbsan\\Documents\\GitHub\\GitUpdate\\GitUpdate2\\update\\update.csproj",
->>>>>>> origin/main
   "expectedPackageFiles": [],
-  "logs": []
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "message": "Problem reading the cache file C:\\Users\\jbsan\\OneDrive\\Documents\\GitHub\\GitUpdate\\GitUpdate2\\update\\obj\\project.nuget.cache : '<' is an invalid start of a property name. Expected a '\"'. Path: $ | LineNumber: 2 | BytePositionInLine: 0.",
+      "projectPath": "C:\\Users\\jbsan\\OneDrive\\Documents\\GitHub\\GitUpdate\\GitUpdate2\\update\\update.csproj",
+      "warningLevel": 1,
+      "filePath": "C:\\Users\\jbsan\\OneDrive\\Documents\\GitHub\\GitUpdate\\GitUpdate2\\update\\update.csproj",
+      "targetGraphs": []
+    }
+  ]
 }
