@@ -1,8 +1,14 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "uwoOcXn49Ms=",
   "success": true,
   "projectFilePath": "C:\\Users\\jbsan\\OneDrive\\Documents\\GitHub\\GitUpdate\\GitUpdate2\\update\\update.csproj",
+=======
+  "dgSpecHash": "+UZo1Dwl9ys=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\jbsan\\Documents\\GitHub\\GitUpdate\\GitUpdate2\\update\\update.csproj",
+>>>>>>> origin/main
   "expectedPackageFiles": [],
   "logs": []
 }
