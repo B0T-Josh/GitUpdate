@@ -483,27 +483,34 @@ Push everytime you finish a file
                 {
                     if(args[i+1] != null)
                     {
-                        if(add(args[i+1]))
+                        if(use(args[i+3]))
                         {
-                            if(commit(args[i+2]))
+                            if(add(args[i+1]))
                             {
-                                if(push(args[i+3]))
+                                if(commit(args[i+2]))
                                 {
-                                    print("Push successful\n");   
+                                    if(push(args[i+3]))
+                                    {
+                                        print("Push successful\n");   
+                                    } 
+                                    else
+                                    {
+                                        print("Push unsuccessful\n");
+                                    }
                                 } 
                                 else
                                 {
-                                    print("Push unsuccessful\n");
+                                    print("Commit unsuccessful\n");
                                 }
                             } 
                             else
                             {
-                                print("Commit unsuccessful\n");
+                                print("Add unsuccessful\n");
                             }
                         } 
                         else
                         {
-                            print("Add unsuccessful\n");
+                            print("Use unsuccessful");
                         }
                     } 
                     else
