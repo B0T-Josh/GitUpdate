@@ -1,0 +1,15 @@
+/Users/josh/Documents/GitHub/GitUpdate/GitUpdateMac/bin/Debug/net10.0/up
+/Users/josh/Documents/GitHub/GitUpdate/GitUpdateMac/bin/Debug/net10.0/up.deps.json
+/Users/josh/Documents/GitHub/GitUpdate/GitUpdateMac/bin/Debug/net10.0/up.runtimeconfig.json
+/Users/josh/Documents/GitHub/GitUpdate/GitUpdateMac/bin/Debug/net10.0/up.dll
+/Users/josh/Documents/GitHub/GitUpdate/GitUpdateMac/bin/Debug/net10.0/up.pdb
+/Users/josh/Documents/GitHub/GitUpdate/GitUpdateMac/obj/Debug/net10.0/up.GeneratedMSBuildEditorConfig.editorconfig
+/Users/josh/Documents/GitHub/GitUpdate/GitUpdateMac/obj/Debug/net10.0/up.AssemblyInfoInputs.cache
+/Users/josh/Documents/GitHub/GitUpdate/GitUpdateMac/obj/Debug/net10.0/up.AssemblyInfo.cs
+/Users/josh/Documents/GitHub/GitUpdate/GitUpdateMac/obj/Debug/net10.0/up.csproj.CoreCompileInputs.cache
+/Users/josh/Documents/GitHub/GitUpdate/GitUpdateMac/obj/Debug/net10.0/up.sourcelink.json
+/Users/josh/Documents/GitHub/GitUpdate/GitUpdateMac/obj/Debug/net10.0/up.dll
+/Users/josh/Documents/GitHub/GitUpdate/GitUpdateMac/obj/Debug/net10.0/refint/up.dll
+/Users/josh/Documents/GitHub/GitUpdate/GitUpdateMac/obj/Debug/net10.0/up.pdb
+/Users/josh/Documents/GitHub/GitUpdate/GitUpdateMac/obj/Debug/net10.0/up.genruntimeconfig.cache
+/Users/josh/Documents/GitHub/GitUpdate/GitUpdateMac/obj/Debug/net10.0/ref/up.dll
