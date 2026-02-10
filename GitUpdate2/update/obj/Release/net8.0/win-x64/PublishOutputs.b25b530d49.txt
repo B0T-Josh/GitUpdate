@@ -1,2 +1,0 @@
-/Users/josh/Documents/GitHub/GitUpdate/GitUpdate2/update/bin/Release/net8.0/win-x64/publish/update.pdb
-/Users/josh/Documents/GitHub/GitUpdate/GitUpdate2/update/bin/Release/net8.0/win-x64/publish/update.exe
