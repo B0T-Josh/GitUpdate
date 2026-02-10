@@ -1,15 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "pOJrk65zRSM=",
+  "dgSpecHash": "l5+36c96cqk=",
   "success": true,
   "projectFilePath": "/Users/josh/Documents/GitHub/GitUpdate/GitUpdate2/update/update.csproj",
   "expectedPackageFiles": [
-    "/Users/josh/.nuget/packages/microsoft.net.illink.tasks/8.0.23/microsoft.net.illink.tasks.8.0.23.nupkg.sha512",
     "/Users/josh/.nuget/packages/microsoft.netcore.app.ref/8.0.23/microsoft.netcore.app.ref.8.0.23.nupkg.sha512",
-    "/Users/josh/.nuget/packages/microsoft.netcore.app.runtime.win-x64/8.0.23/microsoft.netcore.app.runtime.win-x64.8.0.23.nupkg.sha512",
     "/Users/josh/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.23/microsoft.aspnetcore.app.ref.8.0.23.nupkg.sha512",
-    "/Users/josh/.nuget/packages/microsoft.aspnetcore.app.runtime.win-x64/8.0.23/microsoft.aspnetcore.app.runtime.win-x64.8.0.23.nupkg.sha512",
-    "/Users/josh/.nuget/packages/microsoft.netcore.app.host.win-x64/8.0.23/microsoft.netcore.app.host.win-x64.8.0.23.nupkg.sha512"
+    "/Users/josh/.nuget/packages/microsoft.netcore.app.host.osx-arm64/8.0.23/microsoft.netcore.app.host.osx-arm64.8.0.23.nupkg.sha512"
   ],
   "logs": []
 }
