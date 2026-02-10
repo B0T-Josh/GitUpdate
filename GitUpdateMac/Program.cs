@@ -168,7 +168,7 @@ class Update
         }
         Process proc = new Process();
         proc.StartInfo.FileName = "/bin/zsh";
-        proc.StartInfo.Arguments = $"-c \"git add \"{file}\"\"";
+        proc.StartInfo.Arguments = $"-c \"git add '{file}'\"";
         proc.StartInfo.UseShellExecute = false;
         try
         {
@@ -189,16 +189,16 @@ class Update
         }
     }
 
-    static bool commit(string file)
+    static bool commit(string msg)
     {
-        if(file == null)
+        if(msg == null)
         {
             print("Missing filename\n");
             return false;
         }
         Process proc = new Process();
         proc.StartInfo.FileName = "/bin/zsh";
-        proc.StartInfo.Arguments = $"-c \"git commit -m \"{file}\"\"";
+        proc.StartInfo.Arguments = $"-c \"git commit -m '{msg}'\"";
         proc.StartInfo.UseShellExecute = false;
         try
         {
