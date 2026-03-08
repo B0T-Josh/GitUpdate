@@ -87,7 +87,7 @@ class Update
             }
             Print("Press enter to confirm.");
 
-            ConsoleKeyInfo key = Console.ReadKey(true);
+            key = Console.ReadKey(true);
             if(key.Key == ConsoleKey.DownArrow) i++;
             else if(key.Key == ConsoleKey.UpArrow) i--;
             if(i >= size) i = 0;
