@@ -1,86 +1,166 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 
 class Update
 {
     static ConsoleKeyInfo key;
-    static void print(string msg)
+    static void Print(string msg)
     {
         Console.Write(msg);
     }
 
-    static void setChoice(string method, int index)
+    static void SetChoice(string method, int index)
     {
         Console.Clear();
         if(method == "pull")
         {
             if(index == 1)
             {
-                print("Choose a method for pull\n");
+                Print("Choose a method for pull\n");
                 Console.ForegroundColor = ConsoleColor.Blue;
-                print("--rebase <=\n");
+                Print("--rebase <=\n");
                 Console.ForegroundColor = ConsoleColor.White;
-                print("--abort\n");
-                print("None\n");
-                print("Press enter to confirm.\n");
+                Print("--abort\n");
+                Print("None\n");
+                Print("Press enter to confirm.\n");
             }
             else if(index == 2)
             {
-                print("Choose a method for pull\n");
-                print("--rebase\n");
+                Print("Choose a method for pull\n");
+                Print("--rebase\n");
                 Console.ForegroundColor = ConsoleColor.Blue;
-                print("--abort <=\n");
+                Print("--abort <=\n");
                 Console.ForegroundColor = ConsoleColor.White;
-                print("None\n");
-                print("Press enter to confirm.\n");
+                Print("None\n");
+                Print("Press enter to confirm.\n");
             } 
             else if(index == 3)
             {
-                print("Choose a method for pull\n");
-                print("--rebase\n");
-                print("--abort\n");
+                Print("Choose a method for pull\n");
+                Print("--rebase\n");
+                Print("--abort\n");
                 Console.ForegroundColor = ConsoleColor.Blue;
-                print("None <=\n");
+                Print("None <=\n");
                 Console.ForegroundColor = ConsoleColor.White;
-                print("Press enter to confirm.\n");
+                Print("Press enter to confirm.\n");
             }
         }        
     }
-    static bool pull()
+
+    static string SelectBranch()
+    {
+        int i = 1;
+        Process process = new();
+        process.StartInfo.FileName = "/bin/zsh";
+        process.StartInfo.Arguments = "-c \"git branch\"";
+        process.StartInfo.UseShellExecute = false;
+        process.StartInfo.RedirectStandardOutput = true;
+        
+        process.Start();
+
+        string temp = process.StandardOutput.ReadToEnd();
+        string[] branches = temp.Replace("* ", "").Split("/n");
+        int size = branches.Length;
+
+        do
+        {
+            Print("----------- Select Branch -----------");
+
+            for(int j = 0; j < size; j++)
+            {
+                if(i == j)
+                {
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Print(branches[j] + " <\n");
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+                else
+                {
+                    Print(branches[j] + "\n");
+                }
+            }
+            Print("Press enter to confirm.");
+
+            ConsoleKeyInfo key = Console.ReadKey(true);
+            if(key.Key == ConsoleKey.DownArrow) i++;
+            else if(key.Key == ConsoleKey.UpArrow) i--;
+            if(i > size) i = 1;
+            else i = size - 1;
+
+        } while(key.Key != ConsoleKey.Enter);
+
+        return branches[i];
+    }
+
+    static string Branch()
+    {
+        Process process = new();
+        process.StartInfo.FileName = "/bin/zsh";
+        process.StartInfo.Arguments = "-c \"git branch\"";
+        process.StartInfo.UseShellExecute = false;
+        process.StartInfo.RedirectStandardOutput = true;
+        
+        process.Start();
+
+        string[] branches = process.StandardOutput.ReadToEnd().Split("\n");
+        foreach(string branch in branches)
+        {
+            if(branch.StartsWith("*"))
+            {
+                return branch.Replace("* ", "");
+            }
+        }
+        return "";
+    }
+    static bool Pull(string to_branch)
     {
         Process proc = new Process();
         string query = "";
         int i = 1;
-        setChoice("pull", i);
+        SetChoice("pull", i);
         do {
             key = Console.ReadKey(true);
             if(key.Key == ConsoleKey.DownArrow) i++;
             else if(key.Key == ConsoleKey.UpArrow) i--;
             if(i > 3) i = 1;
             else if(i < 1) i = 3;
-            setChoice("pull", i);
+            SetChoice("pull", i);
         } while(key.Key != ConsoleKey.Enter);
         if(i == 1)
         {
-            string branch = "";
-            do
+            string branch;
+            if(to_branch.Length < 1)
             {
-                Console.Clear();
-                print("Enter branch name: ");   
-                branch = Console.ReadLine() ?? "";
-            } while(branch == "");
+                do
+                {
+                    Console.Clear();
+                    Print("Enter branch name: ");   
+                    branch = Console.ReadLine() ?? "";
+                } while(branch == "");
+            }
+            else
+            {
+                branch = to_branch;
+            }
             query = $"-c \"git pull origin {branch} --rebase\"";
         }
         else if(i == 2) query = "-c \"git merge --abort\"";
         else if(i == 3)
         {
-            string branch = "";
-            do
+            string branch;
+            if(to_branch.Length < 1)
             {
-                Console.Clear();
-                print("Enter branch name: ");   
-                branch = Console.ReadLine() ?? "";
-            } while(branch == ""); 
+                do
+                {
+                    Console.Clear();
+                    Print("Enter branch name: ");   
+                    branch = Console.ReadLine() ?? "";
+                } while(branch == "");
+            }
+            else
+            {
+                branch = to_branch;
+            }
             query = $"-c \"git pull origin {branch}\"";
         }
         proc.StartInfo.FileName = "/bin/zsh";
@@ -99,11 +179,11 @@ class Update
         }
     }
 
-    static bool fetch(string branch)
+    static bool Fetch(string branch)
     {
         if(branch == null)
         {
-            print("Missing branch name\n");
+            Print("Missing branch name\n");
             return false;
         }
         Process proc = new Process();
@@ -129,11 +209,11 @@ class Update
         }
     }
 
-    static bool merge(string branch)
+    static bool Merge(string branch)
     {
         if(branch == null)
         {
-            print("Missing branch name\n");
+            Print("Missing branch name\n");
             return false;
         }
         Process proc = new Process();
@@ -159,11 +239,11 @@ class Update
         }
     }
 
-    static bool add(string file)
+    static bool Add(string file)
     {
         if(file == null)
         {
-            print("Missing filename\n");
+            Print("Missing filename\n");
             return false;
         }
         Process proc = new Process();
@@ -189,11 +269,11 @@ class Update
         }
     }
 
-    static bool commit(string msg)
+    static bool Commit(string msg)
     {
         if(msg == null)
         {
-            print("Missing filename\n");
+            Print("Missing filename\n");
             return false;
         }
         Process proc = new Process();
@@ -219,11 +299,11 @@ class Update
         }
     }
 
-    static bool push(string branch)
+    static bool Push(string branch)
     {
         if(branch == null)
         {
-            print("Missing branch name\n");
+            Print("Missing branch name\n");
             return false;
         }
         Process proc = new Process();
@@ -249,11 +329,11 @@ class Update
         }
     }
 
-    static bool use(string branch)
+    static bool Use(string branch)
     {
         if(branch == null)
         {
-            print("Missing branch name\n");
+            Print("Missing branch name\n");
             return false;
         }
         Process proc = new Process();
@@ -279,9 +359,9 @@ class Update
         }
     }
 
-    static void printErr()
+    static void PrintErr()
     {
-        print(@"Syntax:
+        Print(@"Syntax:
     update [command] [option]
 Command
     ['-a', '-c', '-p', '-f', '-m', '-A', '-P', '-u', '-b', '-g']
@@ -326,7 +406,7 @@ Push everytime you finish a file
     {
         if(args.Length < 1)
         {
-            printErr();
+            PrintErr();
         }
         else
         {
@@ -336,19 +416,19 @@ Push everytime you finish a file
                 {
                     if(args[i+1] != null)
                     {
-                        if(add(args[i+1]))
+                        if(Add(args[i+1]))
                         {
-                            print("Add successful\n");   
+                            Print("Add successful\n");   
                         } 
                         else
                         {
-                            print("Add unsuccessful\n");
+                            Print("Add unsuccessful\n");
                         }
                     }
                     else
                     {
-                        print("Syntax error.\n");
-                        printErr();
+                        Print("Syntax error.\n");
+                        PrintErr();
                         break;
                     }
                 } 
@@ -356,255 +436,267 @@ Push everytime you finish a file
                 {
                     if(args[i+1] != null)
                     {
-                        if(commit(args[i+1]))
+                        if(Commit(args[i+1]))
                         {
-                            print("Commit successful\n");   
+                            Print("Commit successful\n");   
                         } 
                         else
                         {
-                            print("Commit unsuccessful\n");
+                            Print("Commit unsuccessful\n");
                         }
                     }
                     else
                     {
-                        print("Syntax error.\n");
-                        printErr();
+                        Print("Syntax error.\n");
+                        PrintErr();
                         break;
                     }
                 }
                 if(args[i] == "-f")
                 {
-                    if(args[i+1] != null)
+                    string branch;
+                    try
                     {
-                        if(fetch(args[i+1]))
-                        {
-                            print("Fetch successful\n");   
-                        } 
-                        else
-                        {
-                            print("Fetch unsuccessful\n");
-                        }
+                        branch = args[i+1];
                     }
+                    catch
+                    {
+                        branch = SelectBranch();
+                    }
+                    if(Fetch(branch))
+                    {
+                        Print("Fetch successful\n");   
+                    } 
                     else
                     {
-                        print("Syntax error.\n");
-                        printErr();
-                        break;
+                        Print("Fetch unsuccessful\n");
                     }
                 }
                 if(args[i] == "-m")
                 {
-                    if(args[i+1] != null)
+                    string branch;
+                    try
                     {
-                        if(merge(args[i+1]))
-                        {
-                            print("Commit successful\n");   
-                        } 
-                        else
-                        {
-                            print("Commit unsuccessful\n");
-                        }
+                        branch = args[i+1];
                     }
+                    catch
+                    {
+                        branch = SelectBranch();
+                    }
+                    if(Merge(branch))
+                    {
+                        Print("Commit successful\n");   
+                    } 
                     else
                     {
-                        print("Syntax error.\n");
-                        printErr();
-                        break;
+                        Print("Commit unsuccessful\n");
                     }
                 }
                 if(args[i] == "-p")
                 {
-                    if(args[i+1] != null)
+                    string branch;
+                    try
                     {
-                        if(push(args[i+1]))
-                        {
-                            print("Push successful\n");   
-                        } 
-                        else
-                        {
-                            print("Push unsuccessful\n");
-                        }
+                        branch = args[i+1];
                     }
+                    catch
+                    {
+                        branch = Branch();
+                    }
+                    if(Push(branch))
+                    {
+                        Print("Push successful\n");   
+                    } 
                     else
                     {
-                        print("Syntax error.\n");
-                        printErr();
-                        break;
+                        Print("Push unsuccessful\n");
                     }
                 }
                 if(args[i] == "-P")
                 {
-                    if(args[i+1] != null)
+                    string branch;
+                    try
                     {
-                        if(fetch(args[i+1]))
+                        branch = args[i+1];
+                    }
+                    catch
+                    {
+                        branch = Branch();
+                    }
+                    if(Fetch(branch))
+                    {
+                        if(Merge(branch))
                         {
-                            if(merge(args[i+1]))
-                            {
-                                print("Pull successful\n");   
-                            } 
-                            else
-                            {
-                                print("Merge unsuccessful\n");
-                            }
+                            Print("Pull successful\n");   
                         } 
                         else
                         {
-                            print("Fetch unsuccessful\n");
+                            Print("Merge unsuccessful\n");
                         }
                     } 
                     else
                     {
-                        print("Syntax error.\n");
-                        printErr();
-                        break;
-                    }
+                        Print("Fetch unsuccessful\n");
+                    };
                 }
                 if(args[i] == "-A")
                 {
-                    if(args[i+1] != null)
+                    string branch;
+                    try
                     {
-                        if(use(args[i+3]))
+                        branch = args[i+3];
+                    }
+                    catch
+                    {
+                        branch = Branch();
+                    }
+                    if(Use(branch))
+                    {
+                        if(Add(args[i+1]))
                         {
-                            if(add(args[i+1]))
+                            if(Commit(args[i+2]))
                             {
-                                if(commit(args[i+2]))
+                                if(Push(branch))
                                 {
-                                    if(push(args[i+3]))
-                                    {
-                                        print("Push successful\n");   
-                                    } 
-                                    else
-                                    {
-                                        print("Push unsuccessful\n");
-                                    }
+                                    Print("Push successful\n");   
                                 } 
                                 else
                                 {
-                                    print("Commit unsuccessful\n");
+                                    Print("Push unsuccessful\n");
                                 }
                             } 
                             else
                             {
-                                print("Add unsuccessful\n");
+                                Print("Commit unsuccessful\n");
                             }
                         } 
                         else
                         {
-                            print("Use unsuccessful");
+                            Print("Add unsuccessful\n");
                         }
                     } 
                     else
                     {
-                        print("Syntax error.\n");
-                        printErr();
-                        break;
+                        Print("Use unsuccessful");
                     }
                 }
                 if(args[i] == "-b")
                 {
-                    if(args[i+1] != null)
+                    string branch;
+                    string to_branch;
+                    try
                     {
-                        if(use(args[i+3]))
+                        branch = args[i+3];
+                        to_branch = args[i+4];
+                    }
+                    catch
+                    {
+                        branch = Branch();
+                        to_branch = SelectBranch();
+                    }
+                    if(Use(branch))
+                    {
+                        if(Add(args[i+1]))
                         {
-                            if(add(args[i+1]))
+                            if(Commit(args[i+2]))
                             {
-                                if(commit(args[i+2]))
+                                if(Push(branch))
                                 {
-                                    if(push(args[i+3]))
+                                    if(Use(to_branch))
                                     {
-                                        if(use(args[i+4]))
+                                        if(Fetch(branch))
                                         {
-                                            if(fetch(args[i+3]))
+                                            if(Merge(branch))
                                             {
-                                                if(merge(args[i+3]))
+                                                if(Push(to_branch))
                                                 {
-                                                    if(push(args[i+4]))
+                                                    if(Use(branch))
                                                     {
-                                                        if(use(args[i+3]))
-                                                        {
-                                                            print("Use successful\n");
-                                                        }
-                                                        else
-                                                        {
-                                                            print("Use unsuccessful\n");
-                                                        }
+                                                        Print("Use successful\n");
                                                     }
                                                     else
                                                     {
-                                                        print("Push unsuccessful\n");
+                                                        Print("Use unsuccessful\n");
                                                     }
                                                 }
                                                 else
                                                 {
-                                                    print("Merge unsuccessful\n");
+                                                    Print("Push unsuccessful\n");
                                                 }
-                                            } 
+                                            }
                                             else
                                             {
-                                                print("Fetch unsuccessful\n");
-                                            }  
+                                                Print("Merge unsuccessful\n");
+                                            }
                                         } 
                                         else
                                         {
-                                            print("Push unsuccessful\n");
-                                        }
+                                            Print("Fetch unsuccessful\n");
+                                        }  
                                     } 
                                     else
                                     {
-                                        print("Push unsuccessful\n");
+                                        Print("Push unsuccessful\n");
                                     }
                                 } 
                                 else
                                 {
-                                    print("Commit unsuccessful\n");
+                                    Print("Push unsuccessful\n");
                                 }
                             } 
                             else
                             {
-                                print("Add unsuccessful\n");
+                                Print("Commit unsuccessful\n");
                             }
-                        }
+                        } 
                         else
                         {
-                            print("Use unsuccessful");
+                            Print("Add unsuccessful\n");
                         }
-                    } 
+                    }
                     else
                     {
-                        print("Syntax error.\n");
-                        printErr();
-                        break;
+                        Print("Use unsuccessful");
                     }
                 }
                 if(args[i] == "-g")
                 {
-                    if(pull())
+                    string branch;
+                    try
                     {
-                        print("Pull successful");
+                        branch = args[i+1];
+                    }
+                    catch
+                    {
+                        branch = "";
+                    }
+                    if(Pull(branch))
+                    {
+                        Print("Pull successful");
                     } 
                     else
                     {
-                        print("Pull unsuccessful\n");
+                        Print("Pull unsuccessful\n");
                     }
                 }
                 if(args[i] == "-u")
                 {
-                    if(args[i+1] != null)
+                    string branch;
+                    try
                     {
-                        if(use(args[i+1]))
-                        {
-                            print("Use successful");
-                        } 
-                        else
-                        {
-                            print("Use unsuccessful\n");
-                        }
+                        branch = args[i+1];
                     }
+                    catch
+                    {
+                        branch = SelectBranch();
+                    }
+                    if(Use(branch))
+                    {
+                        Print("Use successful");
+                    } 
                     else
                     {
-                        print("Syntax error.\n");
-                        printErr();
-                        break;
+                        Print("Use unsuccessful\n");
                     }
                 }
             }
