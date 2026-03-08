@@ -1,4 +1,4 @@
-using System;
+using System.Text.RegularExpressions;
 using System.Diagnostics;
 
 class Update
@@ -49,7 +49,7 @@ class Update
 
     static string SelectBranch()
     {
-        int i = 1;
+        int i = 0;
         Process process = new();
         process.StartInfo.FileName = "/bin/zsh";
         process.StartInfo.Arguments = "-c \"git branch\"";
@@ -59,12 +59,18 @@ class Update
         process.Start();
 
         string temp = process.StandardOutput.ReadToEnd();
-        string[] branches = temp.Replace("* ", "").Split("/n");
+        string[] branches = Regex.Replace(temp, @"\* ", "")
+        .Trim()
+        .Split("\n")
+        .Select(b => b.Trim())        
+        .Where(b => b != string.Empty)
+        .ToArray();
         int size = branches.Length;
 
         do
         {
-            Print("----------- Select Branch -----------");
+            Console.Clear();
+            Print("----------- Select Branch -----------\n");
 
             for(int j = 0; j < size; j++)
             {
@@ -84,10 +90,12 @@ class Update
             ConsoleKeyInfo key = Console.ReadKey(true);
             if(key.Key == ConsoleKey.DownArrow) i++;
             else if(key.Key == ConsoleKey.UpArrow) i--;
-            if(i > size) i = 1;
-            else i = size - 1;
+            if(i >= size) i = 0;
+            else if(i < 0) i = size - 1;
 
         } while(key.Key != ConsoleKey.Enter);
+
+        Console.Clear();
 
         return branches[i];
     }
