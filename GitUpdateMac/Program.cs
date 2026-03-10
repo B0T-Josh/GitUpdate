@@ -51,8 +51,8 @@ class Update
     {
         int i = 0;
         Process process = new();
-        process.StartInfo.FileName = "/bin/zsh";
-        process.StartInfo.Arguments = "-c \"git branch\"";
+        process.StartInfo.FileName = "git";
+        process.StartInfo.Arguments = "branch";
         process.StartInfo.UseShellExecute = false;
         process.StartInfo.RedirectStandardOutput = true;
         
@@ -103,8 +103,8 @@ class Update
     static string Branch()
     {
         Process process = new();
-        process.StartInfo.FileName = "/bin/zsh";
-        process.StartInfo.Arguments = "-c \"git branch\"";
+        process.StartInfo.FileName = "git";
+        process.StartInfo.Arguments = "branch";
         process.StartInfo.UseShellExecute = false;
         process.StartInfo.RedirectStandardOutput = true;
         
@@ -150,9 +150,9 @@ class Update
             {
                 branch = to_branch;
             }
-            query = $"-c \"git pull origin {branch} --rebase\"";
+            query = $"pull origin {branch} --rebase";
         }
-        else if(i == 2) query = "-c \"git merge --abort\"";
+        else if(i == 2) query = "merge --abort";
         else if(i == 3)
         {
             string branch;
@@ -169,9 +169,9 @@ class Update
             {
                 branch = to_branch;
             }
-            query = $"-c \"git pull origin {branch}\"";
+            query = $"pull origin {branch}";
         }
-        proc.StartInfo.FileName = "/bin/zsh";
+        proc.StartInfo.FileName = "git";
         proc.StartInfo.Arguments = query;
         proc.StartInfo.UseShellExecute = false;
         try
@@ -195,8 +195,8 @@ class Update
             return false;
         }
         Process proc = new Process();
-        proc.StartInfo.FileName = "/bin/zsh";
-        proc.StartInfo.Arguments = $"-c \"git fetch origin {branch}\"";
+        proc.StartInfo.FileName = "git";
+        proc.StartInfo.Arguments = $"fetch origin {branch}";
         proc.StartInfo.UseShellExecute = false;
         try
         {
@@ -225,8 +225,8 @@ class Update
             return false;
         }
         Process proc = new Process();
-        proc.StartInfo.FileName = "/bin/zsh";
-        proc.StartInfo.Arguments = $"-c \"git merge origin/{branch}\"";
+        proc.StartInfo.FileName = "git";
+        proc.StartInfo.Arguments = $"merge origin/{branch}";
         proc.StartInfo.UseShellExecute = false;
         try
         {
@@ -255,8 +255,8 @@ class Update
             return false;
         }
         Process proc = new Process();
-        proc.StartInfo.FileName = "/bin/zsh";
-        proc.StartInfo.Arguments = $"-c \"git add '{file}'\"";
+        proc.StartInfo.FileName = "git";
+        proc.StartInfo.Arguments = $"add \"{file}\"";
         proc.StartInfo.UseShellExecute = false;
         try
         {
@@ -285,8 +285,8 @@ class Update
             return false;
         }
         Process proc = new Process();
-        proc.StartInfo.FileName = "/bin/zsh";
-        proc.StartInfo.Arguments = $"-c \"git commit -m '{msg}'\"";
+        proc.StartInfo.FileName = "git";
+        proc.StartInfo.Arguments = $"commit -m \"{msg}\"";
         proc.StartInfo.UseShellExecute = false;
         try
         {
@@ -315,8 +315,8 @@ class Update
             return false;
         }
         Process proc = new Process();
-        proc.StartInfo.FileName = "/bin/zsh";
-        proc.StartInfo.Arguments = $"-c \"git push -u origin  \"{branch}\"\"";
+        proc.StartInfo.FileName = "git";
+        proc.StartInfo.Arguments = $"push -u origin {branch}";
         proc.StartInfo.UseShellExecute = false;
         try
         {
@@ -345,8 +345,8 @@ class Update
             return false;
         }
         Process proc = new Process();
-        proc.StartInfo.FileName = "/bin/zsh";
-        proc.StartInfo.Arguments = $"-c \"git checkout \"{branch}\"\"";
+        proc.StartInfo.FileName = "git";
+        proc.StartInfo.Arguments = $"checkout {branch}";
         proc.StartInfo.UseShellExecute = false;
         try
         {
