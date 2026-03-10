@@ -1,0 +1,15 @@
+/Users/josh/Documents/GitHub/GitUpdate/GitUpdate2/update/bin/Debug/net8.0/update
+/Users/josh/Documents/GitHub/GitUpdate/GitUpdate2/update/bin/Debug/net8.0/update.deps.json
+/Users/josh/Documents/GitHub/GitUpdate/GitUpdate2/update/bin/Debug/net8.0/update.runtimeconfig.json
+/Users/josh/Documents/GitHub/GitUpdate/GitUpdate2/update/bin/Debug/net8.0/update.dll
+/Users/josh/Documents/GitHub/GitUpdate/GitUpdate2/update/bin/Debug/net8.0/update.pdb
+/Users/josh/Documents/GitHub/GitUpdate/GitUpdate2/update/obj/Debug/net8.0/update.GeneratedMSBuildEditorConfig.editorconfig
+/Users/josh/Documents/GitHub/GitUpdate/GitUpdate2/update/obj/Debug/net8.0/update.AssemblyInfoInputs.cache
+/Users/josh/Documents/GitHub/GitUpdate/GitUpdate2/update/obj/Debug/net8.0/update.AssemblyInfo.cs
+/Users/josh/Documents/GitHub/GitUpdate/GitUpdate2/update/obj/Debug/net8.0/update.csproj.CoreCompileInputs.cache
+/Users/josh/Documents/GitHub/GitUpdate/GitUpdate2/update/obj/Debug/net8.0/update.sourcelink.json
+/Users/josh/Documents/GitHub/GitUpdate/GitUpdate2/update/obj/Debug/net8.0/update.dll
+/Users/josh/Documents/GitHub/GitUpdate/GitUpdate2/update/obj/Debug/net8.0/refint/update.dll
+/Users/josh/Documents/GitHub/GitUpdate/GitUpdate2/update/obj/Debug/net8.0/update.pdb
+/Users/josh/Documents/GitHub/GitUpdate/GitUpdate2/update/obj/Debug/net8.0/update.genruntimeconfig.cache
+/Users/josh/Documents/GitHub/GitUpdate/GitUpdate2/update/obj/Debug/net8.0/ref/update.dll

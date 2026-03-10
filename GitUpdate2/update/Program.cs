@@ -410,7 +410,7 @@ Push everytime you finish a file
 ");
     }
 
-    static void Main(String[] args)
+    static void Main(string[] args)
     {
         if(args.Length < 1)
         {
@@ -440,7 +440,7 @@ Push everytime you finish a file
                         break;
                     }
                 } 
-                if(args[i] == "/c")
+                if(args[i] == "-c")
                 {
                     if(args[i+1] != null)
                     {
