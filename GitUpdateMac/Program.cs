@@ -1,4 +1,4 @@
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using System.Diagnostics;
 
 class Update
@@ -59,30 +59,48 @@ class Update
         process.Start();
 
         string temp = process.StandardOutput.ReadToEnd();
-        string[] branches = Regex.Replace(temp, @"\* ", "")
+        string[] branches = temp
         .Trim()
         .Split("\n")
         .Select(b => b.Trim())        
         .Where(b => b != string.Empty)
         .ToArray();
         int size = branches.Length;
-
         do
         {
             Console.Clear();
             Print("----------- Select Branch -----------\n");
-
             for(int j = 0; j < size; j++)
             {
                 if(i == j)
                 {
-                    Console.ForegroundColor = ConsoleColor.Blue;
-                    Print(branches[j] + " <\n");
-                    Console.ForegroundColor = ConsoleColor.White;
+                    if(branches[j].StartsWith("* "))
+                    {
+                        Console.BackgroundColor = ConsoleColor.White;
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        Print(branches[j] + " <\n");
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.ResetColor();
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        Print(branches[j] + " <\n");
+                        Console.ForegroundColor = ConsoleColor.White;
+                    }
                 }
                 else
                 {
-                    Print(branches[j] + "\n");
+                    if(branches[j].StartsWith("* "))
+                    {
+                        Console.BackgroundColor = ConsoleColor.White;
+                        Print(branches[j] + " <\n");
+                        Console.ResetColor();
+                    } 
+                    else
+                    {
+                        Print(branches[j] + "\n");   
+                    }
                 }
             }
             Print("Press enter to confirm.");
@@ -97,7 +115,7 @@ class Update
 
         Console.Clear();
 
-        return branches[i];
+        return Regex.Replace(branches[i], @"[\s*]", "");
     }
 
     static string Branch()
