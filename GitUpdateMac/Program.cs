@@ -445,10 +445,8 @@ Push everytime you finish a file
 
             foreach(char com in commands)
             {   
-                Print($"{com}");
                 if(com == 'a')
                 {
-                    Print("a");
                     try
                     {
                         string arg = arguments[index];
