@@ -1,5 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 using System.Diagnostics;
+using System.Formats.Asn1;
 
 class Update
 {
@@ -398,7 +399,6 @@ Option
     - -f - you need to type the branch that you want to fetch. This fetches updates from the remote branch.
     - -m - you need to type the branch that you want to merge with. This merges your local repository with the updates from the remote branch.
     - -A - you need to declare what file name to add, commit message, branch name to push to. this will add file, commit, and push using a single command.
-    - -P - you need to type the branch that you want to fetch and merge. This fetches updates and merges it from the remote branch to your local repository.
     - -u - you need to type the branch that you want to use. This uses the branch version and makes you edit the content of that branch without harming or editing the other branches.
     - -b - you need to type the file to add, comment, branch to push to, and branch that should be updated too. this will add, commit, push, use the other branch, fetch and push to the branch.
     - -g - you will be asked if you want to do a --rebase, --abort, or None . if you chose --rebase, you will be asked for input of what branch that you want to pull. if --abort, you will
@@ -436,293 +436,355 @@ Push everytime you finish a file
         }
         else
         {
-            for(int i = 0; i < args.Length; i++)
-            {
-                if(args[i] == "-a")
+            int command_size = args[0].Length - 1;
+            string commands = args[0].Replace("-", "");
+            int argument_size = args.Length - 2;
+            string[] arguments = args;
+            int index = argument_size;
+            
+
+            foreach(char com in commands)
+            {   
+                Print($"{com}");
+                if(com == 'a')
                 {
-                    if(args[i+1] != null)
+                    Print("a");
+                    try
                     {
-                        if(Add(args[i+1]))
+                        string arg = arguments[index];
+                        if(Add(arg))
                         {
-                            Print("Add successful\n");   
-                        } 
+                            Print("Add file successful\n");
+                            index++;
+                        }
                         else
                         {
-                            Print("Add unsuccessful\n");
-                        }
-                    }
-                    else
-                    {
-                        Print("Syntax error.\n");
-                        PrintErr();
-                        break;
-                    }
-                } 
-                if(args[i] == "-c")
-                {
-                    if(args[i+1] != null)
-                    {
-                        if(Commit(args[i+1]))
-                        {
-                            Print("Commit successful\n");   
-                        } 
-                        else
-                        {
-                            Print("Commit unsuccessful\n");
-                        }
-                    }
-                    else
-                    {
-                        Print("Syntax error.\n");
-                        PrintErr();
-                        break;
-                    }
-                }
-                if(args[i] == "-f")
-                {
-                    string branch;
-                    try
-                    {
-                        branch = args[i+1];
-                    }
-                    catch
-                    {
-                        branch = SelectBranch();
-                    }
-                    if(Fetch(branch))
-                    {
-                        Print("Fetch successful\n");   
-                    } 
-                    else
-                    {
-                        Print("Fetch unsuccessful\n");
-                    }
-                }
-                if(args[i] == "-m")
-                {
-                    string branch;
-                    try
-                    {
-                        branch = args[i+1];
-                    }
-                    catch
-                    {
-                        branch = SelectBranch();
-                    }
-                    if(Merge(branch))
-                    {
-                        Print("Commit successful\n");   
-                    } 
-                    else
-                    {
-                        Print("Commit unsuccessful\n");
-                    }
-                }
-                if(args[i] == "-p")
-                {
-                    string branch;
-                    try
-                    {
-                        branch = args[i+1];
-                    }
-                    catch
-                    {
-                        branch = Branch();
-                    }
-                    if(Push(branch))
-                    {
-                        Print("Push successful\n");   
-                    } 
-                    else
-                    {
-                        Print("Push unsuccessful\n");
-                    }
-                }
-                if(args[i] == "-P")
-                {
-                    string branch;
-                    try
-                    {
-                        branch = args[i+1];
-                    }
-                    catch
-                    {
-                        branch = Branch();
-                    }
-                    if(Fetch(branch))
-                    {
-                        if(Merge(branch))
-                        {
-                            Print("Pull successful\n");   
-                        } 
-                        else
-                        {
-                            Print("Merge unsuccessful\n");
+                            throw new Exception("Add file failed");
                         }
                     } 
-                    else
+                    catch(Exception e)
                     {
-                        Print("Fetch unsuccessful\n");
-                    };
-                }
-                if(args[i] == "-A")
-                {
-                    string branch;
-                    try
-                    {
-                        branch = args[i+3];
-                    }
-                    catch
-                    {
-                        branch = Branch();
-                    }
-                    if(Use(branch))
-                    {
-                        if(Add(args[i+1]))
+                        if(e is IndexOutOfRangeException)
                         {
-                            if(Commit(args[i+2]))
+                            if(Add("."))
                             {
-                                if(Push(branch))
-                                {
-                                    Print("Push successful\n");   
-                                } 
-                                else
-                                {
-                                    Print("Push unsuccessful\n");
-                                }
+                                Print("Add file successful\n");
+                                index++;
+                                continue;
                             } 
                             else
                             {
-                                Print("Commit unsuccessful\n");
+                                throw new Exception("Add file failed");
                             }
-                        } 
-                        else
-                        {
-                            Print("Add unsuccessful\n");
                         }
-                    } 
-                    else
-                    {
-                        Print("Use unsuccessful");
+                        PrintErr();
+                        Print(e.Message);
                     }
                 }
-                if(args[i] == "-b")
+                else if(com == 'c')
                 {
-                    string branch;
-                    string to_branch;
                     try
                     {
-                        branch = args[i+3];
-                        to_branch = args[i+4];
-                    }
-                    catch
-                    {
-                        branch = Branch();
-                        to_branch = SelectBranch();
-                    }
-                    if(Use(branch))
-                    {
-                        if(Add(args[i+1]))
+                        string arg = arguments[index];
+                        if(Commit(arg))
                         {
-                            if(Commit(args[i+2]))
+                            index++;
+                            Print("Commit successful\n");
+                            continue;
+                        }
+                        else
+                        {
+                            throw new Exception("Commit failed");
+                        }
+                    } 
+                    catch(Exception e)
+                    {
+                        if(e is IndexOutOfRangeException)
+                        {
+                            if(Commit("New update"))
                             {
-                                if(Push(branch))
+                                Print("Commit successful\n");
+                                index++;
+                                continue;
+                            }
+                            else
+                            {
+                                throw new Exception("Commit failed");
+                            }
+                        }
+                        PrintErr();
+                        Print(e.Message);
+                    }
+                }
+                else if(com == 'p')
+                {
+                    try
+                    {
+                        string arg = arguments[index];
+                        if(Push(arg))
+                        {
+                            index++;
+                            Print("Push successful\n");
+                            continue;
+                        }
+                        else
+                        {
+                            throw new Exception("Push failed");
+                        }
+                    } 
+                    catch(Exception e)
+                    {
+                        if(e is IndexOutOfRangeException)
+                        {
+                            if(Push(Branch()))
+                            {
+                                Print("Push successful\n");
+                                index++;
+                                continue;
+                            }
+                            else
+                            {
+                                throw new Exception("Push failed");
+                            }
+                        } 
+                        PrintErr();
+                        Print(e.Message);
+                    }
+                }
+                else if(com == 'f')
+                {
+                    try
+                    {
+                        string arg = arguments[index];
+                        if(Fetch(arg))
+                        {
+                            index++;
+                            Print("Fetch successful\n");
+                            continue;
+                        }
+                        else
+                        {
+                            throw new Exception("Fetch failed\n");
+                        }
+                    } 
+                    catch(Exception e)
+                    {
+                        if(e is IndexOutOfRangeException)
+                        {
+                            if(Fetch(SelectBranch()))
+                            {
+                                Print("Fetch successful\n");
+                                index++;
+                                continue;
+                            }
+                            else
+                            {
+                                throw new Exception("Fetch failed\n");
+                            }
+                        }
+                        PrintErr();
+                        Print(e.Message);
+                    }
+                }
+                else if(com == 'm')
+                {
+                    try
+                    {
+                        string arg = arguments[index];
+                        if(Merge(arg))
+                        {
+                            Print("Merge successful\n");
+                            index++;
+                            continue;
+                        }
+                        else
+                        {
+                            throw new Exception("Merge failed");
+                        }
+                    } 
+                    catch(Exception e)
+                    {
+                        if(e is IndexOutOfRangeException)
+                        {
+                            if(Merge(SelectBranch()))
+                            {
+                                Print("Merge successful");
+                                index++;
+                                continue;
+                            }
+                            else
+                            {
+                                throw new Exception("Merge failed");
+                            }
+                        }
+                        PrintErr();
+                        Print(e.Message);
+                    }
+                }
+                else if(com == 'u')
+                {
+                    try
+                    {
+                        string arg = arguments[index];
+                        if(Use(arg))
+                        {
+                            Print("Checkout successful");
+                            index++;
+                            continue;
+                        }
+                        else
+                        {
+                            throw new Exception("Checkout failed");
+                        }
+                    } 
+                    catch(Exception e)
+                    {
+                        if(e is IndexOutOfRangeException)
+                        {
+                            if (Use(SelectBranch()))
+                            {
+                                Print("Checkout successful");
+                                index++;
+                                continue;
+                            }
+                            else
+                            {
+                                throw new Exception("Checkout failed");
+                            }
+                        }
+                        PrintErr();
+                        Print(e.Message);
+                    }
+                }
+                else if(com == 'g')
+                {
+                    try
+                    {
+                        string arg = arguments[index];
+                        if(Pull(arg))
+                        {
+                            Print("Pull succesful\n");
+                            index++;
+                            continue;
+                        }
+                        else
+                        {
+                            throw new Exception("Pull failed");
+                        }
+                    } 
+                    catch(Exception e)
+                    {
+                        if(e is IndexOutOfRangeException)
+                        {
+                            if(Pull(SelectBranch()))
+                            {
+                                Print("Pull successful");
+                                index++;   
+                                continue;
+                            }
+                            else
+                            {
+                                throw new Exception("Pull failed");
+                            }
+                        }
+                        PrintErr();
+                        Print(e.Message);
+                    }
+                }
+                else if(com == 'A')
+                {
+                    try
+                    {
+                        string arg = arguments[index];
+                        if(Use(Branch()))
+                        {
+                            string file = arg;
+                            if(Add(file))
+                            {
+                                index++;
+                                string comment = arguments[index];
+                                if(Commit(comment))
                                 {
-                                    if(Use(to_branch))
+                                    index++;
+                                    string branch = arguments[index];
+                                    if(Push(branch))
                                     {
-                                        if(Fetch(branch))
-                                        {
-                                            if(Merge(branch))
-                                            {
-                                                if(Push(to_branch))
-                                                {
-                                                    if(Use(branch))
-                                                    {
-                                                        Print("Use successful\n");
-                                                    }
-                                                    else
-                                                    {
-                                                        Print("Use unsuccessful\n");
-                                                    }
-                                                }
-                                                else
-                                                {
-                                                    Print("Push unsuccessful\n");
-                                                }
-                                            }
-                                            else
-                                            {
-                                                Print("Merge unsuccessful\n");
-                                            }
-                                        } 
-                                        else
-                                        {
-                                            Print("Fetch unsuccessful\n");
-                                        }  
-                                    } 
+                                        Print("Update successful\n");
+                                        index++;
+                                        continue;
+                                    }
                                     else
                                     {
-                                        Print("Push unsuccessful\n");
+                                        Print("Push failed\n");
+                                        throw new Exception("");
                                     }
-                                } 
+                                }
                                 else
                                 {
-                                    Print("Push unsuccessful\n");
+                                    Print("Commit failed\n");
+                                    throw new Exception("");
                                 }
-                            } 
+                            }
                             else
                             {
-                                Print("Commit unsuccessful\n");
+                                Print("Add file failed\n");
+                                throw new Exception("");
                             }
                         } 
                         else
                         {
-                            Print("Add unsuccessful\n");
+                            Print("Use failed\n");
+                            throw new Exception("");
                         }
-                    }
-                    else
-                    {
-                        Print("Use unsuccessful");
-                    }
-                }
-                if(args[i] == "-g")
-                {
-                    string branch;
-                    try
-                    {
-                        branch = args[i+1];
-                    }
-                    catch
-                    {
-                        branch = "";
-                    }
-                    if(Pull(branch))
-                    {
-                        Print("Pull successful");
                     } 
-                    else
+                    catch(Exception e)
                     {
-                        Print("Pull unsuccessful\n");
-                    }
-                }
-                if(args[i] == "-u")
-                {
-                    string branch;
-                    try
-                    {
-                        branch = args[i+1];
-                    }
-                    catch
-                    {
-                        branch = SelectBranch();
-                    }
-                    if(Use(branch))
-                    {
-                        Print("Use successful");
-                    } 
-                    else
-                    {
-                        Print("Use unsuccessful\n");
+                        if(e is IndexOutOfRangeException)
+                        {
+                            if(Use(Branch()))
+                            {
+                                string file = ".";
+                                if(Add(file))
+                                {
+                                    index++;
+                                    Print("Enter commit message: ");
+                                    string comment = Console.ReadLine() ?? "New update";
+                                    if(Commit(comment))
+                                    {
+                                        index++;
+                                        string branch = arguments[index];
+                                        if(Push(branch))
+                                        {
+                                            Print("Update successful\n");
+                                            index++;
+                                            continue;
+                                        }
+                                        else
+                                        {
+                                            Print("Push failed\n");
+                                            throw new Exception("");
+                                        }
+                                    }
+                                    else
+                                    {
+                                        Print("Commit failed\n");
+                                        throw new Exception("");
+                                    }
+                                }
+                                else
+                                {
+                                    Print("Add file failed\n");
+                                    throw new Exception("");
+                                }
+                            } 
+                            else
+                            {
+                                Print("Use failed\n");
+                                throw new Exception("");
+                            }
+                        }
+                        PrintErr();
+                        Print(e.Message);
                     }
                 }
             }
