@@ -440,7 +440,7 @@ Push everytime you finish a file
             string[] arguments = args;
             int index = 1;
 
-            if(!commands.Contains("-"))
+            if(!commands.Contains('-'))
             {
                 PrintErr();
                 throw new Exception("Incomplete syntax");
