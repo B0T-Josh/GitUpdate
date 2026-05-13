@@ -437,11 +437,18 @@ Push everytime you finish a file
         else
         {
             int command_size = args[0].Length - 1;
-            string commands = args[0].Replace("-", "");
+            string commands = args[0];
             int argument_size = args.Length - 2;
             string[] arguments = args;
             int index = argument_size;
-            
+
+            if(!commands.Contains("-"))
+            {
+                PrintErr();
+                throw new Exception("Incomplete syntax");
+            }
+
+            commands = commands.Replace("-", "");
 
             foreach(char com in commands)
             {   
@@ -784,6 +791,11 @@ Push everytime you finish a file
                         PrintErr();
                         Print(e.Message);
                     }
+                }
+                else
+                {
+                    PrintErr();
+                    throw new Exception("Incomplete syntax");
                 }
             }
         }
