@@ -436,11 +436,9 @@ Push everytime you finish a file
         }
         else
         {
-            int command_size = args[0].Length - 1;
             string commands = args[0];
-            int argument_size = args.Length - 2;
             string[] arguments = args;
-            int index = argument_size;
+            int index = 1;
 
             if(!commands.Contains("-"))
             {
@@ -461,6 +459,7 @@ Push everytime you finish a file
                         {
                             Print("Add file successful\n");
                             index++;
+                            continue;
                         }
                         else
                         {
