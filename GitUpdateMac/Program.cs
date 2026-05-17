@@ -400,7 +400,6 @@ Option
     - -m - you need to type the branch that you want to merge with. This merges your local repository with the updates from the remote branch.
     - -A - you need to declare what file name to add, commit message, branch name to push to. this will add file, commit, and push using a single command.
     - -u - you need to type the branch that you want to use. This uses the branch version and makes you edit the content of that branch without harming or editing the other branches.
-    - -b - you need to type the file to add, comment, branch to push to, and branch that should be updated too. this will add, commit, push, use the other branch, fetch and push to the branch.
     - -g - you will be asked if you want to do a --rebase, --abort, or None . if you chose --rebase, you will be asked for input of what branch that you want to pull. if --abort, you will
           undo the merge that you have done earlier. if None, you will be asked what branch do you want to pull. 
 Usage:
@@ -414,12 +413,10 @@ Usage:
     - up -b [filename/.] [comment] [branch] [toBranch]
     - up -g [branch]
 Proper usage:
-    - up -f [branch] -m [branch]
-    - up -a [filename/.] -c [comment/message] -p [branch]
+    - up -fm [branch]
+    - up -acp [filename/.] [comment/message]
     - up -A [filename] [comment] [branch]
-    - up -P [branch]
     - up -u [branch]
-    - up -b [filename/.] [comment] [branch] [toBranch]
     - up -g 
 
 Important note:
@@ -447,6 +444,7 @@ Push everytime you finish a file
             }
 
             commands = commands.Replace("-", "");
+            char prev = '-';
 
             foreach(char com in commands)
             {   
@@ -594,17 +592,34 @@ Push everytime you finish a file
                 {
                     try
                     {
-                        string arg = arguments[index];
-                        if(Merge(arg))
+                        if(prev == 'f')
                         {
-                            Print("Merge successful\n");
-                            index++;
-                            continue;
-                        }
+                            if(Merge(arguments[index-1]))
+                            {
+                                Print("Merge successful\n");
+                                index++;
+                                continue;
+                            }
+                            else
+                            {
+                                throw new Exception("Merge failed");
+                            }
+                        } 
                         else
                         {
-                            throw new Exception("Merge failed");
+                            string arg = arguments[index];
+                            if(Merge(arg))
+                            {
+                                Print("Merge successful\n");
+                                index++;
+                                continue;
+                            }
+                            else
+                            {
+                                throw new Exception("Merge failed");
+                            }
                         }
+                        
                     } 
                     catch(Exception e)
                     {
@@ -794,6 +809,7 @@ Push everytime you finish a file
                     PrintErr();
                     throw new Exception("Incomplete syntax");
                 }
+                prev = com;
             }
         }
     }
