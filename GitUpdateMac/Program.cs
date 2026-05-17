@@ -95,7 +95,7 @@ class Update
                     if(branches[j].StartsWith("* "))
                     {
                         Console.BackgroundColor = ConsoleColor.White;
-                        Print(branches[j] + " <\n");
+                        Print(branches[j] + "\n");
                         Console.ResetColor();
                     } 
                     else
