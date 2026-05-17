@@ -405,12 +405,10 @@ Option
 Usage:
     - up -a [filename] / . (to add all changes)
     - up -c [comment/message]
-    - up -p [branch]
+    - up -p
     - up -f [branch]
     - up -m [branch]
     - up -A [filename] [comment] [branch]
-    - up -P [branch]
-    - up -b [filename/.] [comment] [branch] [toBranch]
     - up -g [branch]
 Proper usage:
     - up -fm [branch]
@@ -522,10 +520,8 @@ Push everytime you finish a file
                 {
                     try
                     {
-                        string arg = arguments[index];
-                        if(Push(arg))
+                        if(Push(Branch()))
                         {
-                            index++;
                             Print("Push successful\n");
                             continue;
                         }
@@ -541,7 +537,6 @@ Push everytime you finish a file
                             if(Push(Branch()))
                             {
                                 Print("Push successful\n");
-                                index++;
                                 continue;
                             }
                             else
@@ -728,7 +723,6 @@ Push everytime you finish a file
                                     if(Push(Branch()))
                                     {
                                         Print("Update successful\n");
-                                        index++;
                                         continue;
                                     }
                                     else
@@ -773,7 +767,6 @@ Push everytime you finish a file
                                         if(Push(Branch()))
                                         {
                                             Print("Update successful\n");
-                                            index++;
                                             continue;
                                         }
                                         else
