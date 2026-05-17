@@ -710,8 +710,7 @@ Push everytime you finish a file
                                 if(Commit(comment))
                                 {
                                     index++;
-                                    string branch = arguments[index];
-                                    if(Push(branch))
+                                    if(Push(Branch()))
                                     {
                                         Print("Update successful\n");
                                         index++;
@@ -756,8 +755,7 @@ Push everytime you finish a file
                                     if(Commit(comment))
                                     {
                                         index++;
-                                        string branch = arguments[index];
-                                        if(Push(branch))
+                                        if(Push(Branch()))
                                         {
                                             Print("Update successful\n");
                                             index++;
