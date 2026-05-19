@@ -408,14 +408,14 @@ Usage:
     - up -p
     - up -f [branch]
     - up -m [branch]
-    - up -A [filename] [comment] [branch]
+    - up -A [filename] [comment]
     - up -g [branch]
 Proper usage:
     - up -fm [branch]
     - up -acp [filename/.] [comment/message]
-    - up -A [filename] [comment] [branch]
+    - up -A [filename] [comment]
     - up -u [branch]
-    - up -g 
+    - up -g [branch]
 
 Important note:
 Make sure to fetch and merge before you work on any file.
